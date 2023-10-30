@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Navigate } from "react-router-dom";
 
 import Box from '@mui/material/Box';
 
@@ -11,6 +12,11 @@ import Header from './header';
 
 export default function DashboardLayout({ children }) {
   const [openNav, setOpenNav] = useState(false);
+  const isLoggedin = localStorage.getItem('isLoggedin');
+
+  if (!isLoggedin) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <>

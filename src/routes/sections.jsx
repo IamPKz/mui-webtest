@@ -32,7 +32,7 @@ export default function Router() {
         </DashboardLayout>
       ),
       children: [
-        { path: 'dashboard',element: <IndexPage />, index: true },
+        { path: 'rawlogs',element: <IndexPage />, index: true },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
