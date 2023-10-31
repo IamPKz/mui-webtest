@@ -12,8 +12,9 @@ import Header from './header';
 
 export default function DashboardLayout({ children }) {
   const [openNav, setOpenNav] = useState(false);
-  const isLoggedin = localStorage.getItem('isLoggedin');
 
+  const isLoggedin = localStorage.getItem('isLoggedin');
+  console.log(isLoggedin);
   if (!isLoggedin) {
     return <Navigate to="/" replace />;
   }

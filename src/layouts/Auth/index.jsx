@@ -8,9 +8,9 @@ export default function AuthLayout() {
   if (isLoggedin) {
     /* eslint-disable no-else-return */
     if (userType === "user") {
-      return <Navigate to="/user/rawlogs" replace />;
+      return <Navigate to="/rawlogs" replace />;
     } else if (userType === "admin") {
-      return <Navigate to="/admin/file" replace />;
+      return <Navigate to="/file" replace />;
     }
     return <Navigate to="/" replace />;
     /* eslint-enable no-else-return */
