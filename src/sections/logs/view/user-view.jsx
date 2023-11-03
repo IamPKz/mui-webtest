@@ -37,8 +37,6 @@ export default function UserPage() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  console.log(users);
-
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
     if (id !== '') {
@@ -132,28 +130,18 @@ export default function UserPage() {
                   { id: '' },
                 ]}
               />
-
               <TableBody>
                 {dataFiltered
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
-                      eventtype={row.eventtype}
+                      name={row.name}
                       role={row.role}
                       status={row.status}
                       company={row.company}
                       avatarUrl={row.avatarUrl}
                       isVerified={row.isVerified}
-
-                      count={row.count}
-                      attackid={row.attackid}
-                      type={row.type}
-                      srcip={row.srcip}
-                      tz={row.tz}
-                      attack={row.attack}
-                      policytype={row.policytype}
-
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />

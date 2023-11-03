@@ -18,22 +18,13 @@ import Iconify from 'src/components/iconify';
 
 export default function UserTableRow({
   selected,
-  eventtype,
+  name,
   avatarUrl,
   company,
   role,
   isVerified,
   status,
   handleClick,
-
-  count,
-  attackid,
-  type,
-  srcip,
-  tz,
-  attack,
-  policytype,
-
 }) {
   const [open, setOpen] = useState(null);
 
@@ -48,24 +39,34 @@ export default function UserTableRow({
   return (
     <>
       <TableRow hover tabIndex={-1} role="checkbox" selected={selected}>
+        <TableCell padding="checkbox">
+          <Checkbox disableRipple checked={selected} onChange={handleClick} />
+        </TableCell>
 
-        <TableCell>{eventtype}</TableCell>
+        <TableCell component="th" scope="row" padding="none">
+          <Stack direction="row" alignItems="center" spacing={2}>
+            <Avatar alt={name} src={avatarUrl} />
+            <Typography variant="subtitle2" noWrap>
+              {name}
+            </Typography>
+          </Stack>
+        </TableCell>
 
-        <TableCell>{count}</TableCell>
+        <TableCell>{company}</TableCell>
 
-        <TableCell>{attackid}</TableCell>
+        <TableCell>{role}</TableCell>
 
-        <TableCell>{type}</TableCell>
+        <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell>
 
-        <TableCell>{srcip}</TableCell>
+        <TableCell>
+          <Label color={(status === 'banned' && 'error') || 'success'}>{status}</Label>
+        </TableCell>
 
-        <TableCell>{tz}</TableCell>
-
-        <TableCell>{attack}</TableCell>
-
-        <TableCell>{policytype}</TableCell>
-
-
+        <TableCell align="right">
+          <IconButton onClick={handleOpenMenu}>
+            <Iconify icon="eva:more-vertical-fill" />
+          </IconButton>
+        </TableCell>
       </TableRow>
 
       <Popover
@@ -97,17 +98,8 @@ UserTableRow.propTypes = {
   company: PropTypes.any,
   handleClick: PropTypes.func,
   isVerified: PropTypes.any,
-  eventtype: PropTypes.any,
+  name: PropTypes.any,
   role: PropTypes.any,
   selected: PropTypes.any,
   status: PropTypes.string,
-
-  count: PropTypes.any,
-  attackid: PropTypes.any,
-  type: PropTypes.any,
-  srcip: PropTypes.any,
-  tz: PropTypes.any,
-  attack: PropTypes.any,
-  policytype: PropTypes.any,
-
 };
