@@ -24,6 +24,7 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 
 // ----------------------------------------------------------------------
 
+
 export default function UserPage() {
   const [page, setPage] = useState(0);
 
@@ -37,7 +38,6 @@ export default function UserPage() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  console.log(users);
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -124,11 +124,22 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: 'eventtype', label: 'Eventtype' },
+                  { id: 'count', label: 'Count' },
+                  { id: 'attackid', label: 'Attackid' },
+                  { id: 'type', label: 'Type' },
+                  { id: 'srcip', label: 'Srcip' },
+                  { id: 'tz', label: 'Time zone' },
+                  { id: 'attack', label: 'Attack' },
+                  { id: 'policytype', label: 'Policy_type' },
+                  { id: 'srcintfrole', label: 'Srcintfrole' },
+                  { id: 'dstip', label: 'Dstip' },
+                  { id: 'devname', label: 'Devname' },
+                  { id: 'logid', label: 'Log_id' },
+                  { id: 'level', label: 'Level' },
+                  { id: 'devid', label: 'dev_id' },
+                  { id: 'policyid', label: 'Policyid' },
+                  { id: 'srcport', label: 'Srcport' },
                   { id: '' },
                 ]}
               />
@@ -153,6 +164,37 @@ export default function UserPage() {
                       tz={row.tz}
                       attack={row.attack}
                       policytype={row.policytype}
+
+                      srcintfrole={row.srcintfrole}
+                      dstip={row.dstip}
+                      devname={row.devname}
+                      logid={row.logid}
+                      level={row.level}
+                      devid={row.devid}
+                      policyid={row.policyid}
+                      srcport={row.srcport}
+
+                      tags={row.tags}
+                      msg={row.msg}
+                      log={row.log}
+                      vd={row.vd}
+                      craction={row.craction}
+                      action={row.action}
+                      host={row.host}
+                      srccountry={row.srccountry}
+                      eventtime={row.eventtime}
+                      ftg_type={row.ftg_type}
+                      proto={row.proto}
+                      crscore={row.crscore}
+                      sessionid={row.sessionid}
+                      dstport={row.dstport}
+                      crlevel={row.crlevel}
+                      ftg_subtype={row.ftg_subtype}
+                      srcintf={row.srcintf}
+                      severity={row.severity}
+                      events={row.event}
+
+
 
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
