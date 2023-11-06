@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import axios from 'axios';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -37,7 +37,6 @@ export default function UserPage() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
 
   const handleSort = (event, id) => {
     const isAsc = orderBy === id && order === 'asc';
@@ -125,13 +124,21 @@ export default function UserPage() {
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
                   { id: 'eventtype', label: 'Eventtype' },
+
                   { id: 'count', label: 'Count' },
+
                   { id: 'attackid', label: 'Attackid' },
+
                   { id: 'type', label: 'Type' },
+
                   { id: 'srcip', label: 'Srcip' },
+
                   { id: 'tz', label: 'Time zone' },
+
                   { id: 'attack', label: 'Attack' },
+
                   { id: 'policytype', label: 'Policy_type' },
+
                   { id: 'srcintfrole', label: 'Srcintfrole' },
                   { id: 'dstip', label: 'Dstip' },
                   { id: 'devname', label: 'Devname' },
@@ -139,7 +146,25 @@ export default function UserPage() {
                   { id: 'level', label: 'Level' },
                   { id: 'devid', label: 'dev_id' },
                   { id: 'policyid', label: 'Policyid' },
-                  { id: 'srcport', label: 'Srcport' },
+                  { id: 'srcport', label: 'srcport' },
+                  { id: 'tags', label: 'tags' },
+                  { id: 'priority', label: 'priority' },
+                  { id: 'vd', label: 'vd' },
+                  { id: 'craction', label: 'craction' },
+                  { id: 'action', label: 'action' },
+                  { id: 'host', label: 'host' },
+                  { id: 'srccountry', label: 'srccountry' },
+                  { id: 'eventtime', label: 'eventtime' },
+                  { id: 'ftg_type', label: 'ftg_type' },
+                  { id: 'proto', label: 'proto' },
+                  { id: 'crscore', label: 'crscore' },
+                  { id: 'sessionid', label: 'sessionid' },
+
+                  { id: 'dstport', label: 'dstport' },
+                  { id: 'crlevel', label: 'crlevel' },
+                  { id: 'ftg_subtype', label: 'ftg_subtype' },
+                  { id: 'srcintf', label: 'srcintf' },
+                  { id: 'severity', label: 'severity' },
                   { id: '' },
                 ]}
               />
