@@ -10,7 +10,7 @@ export default function AuthLayout() {
     if (userType === "user") {
       return <Navigate to="/rawlogs" replace />;
     } else if (userType === "admin") {
-      return <Navigate to="/file" replace />;
+      return <Navigate to="/usermanagement" replace />;
     }
     return <Navigate to="/" replace />;
     /* eslint-enable no-else-return */

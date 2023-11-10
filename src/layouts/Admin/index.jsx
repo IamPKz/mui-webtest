@@ -10,40 +10,38 @@ import Header from './header';
 
 // ----------------------------------------------------------------------
 
-export default function DashboardLayout({ children }) {
+export default function AdminLayout({ children }) {
   const [openNav, setOpenNav] = useState(false);
 
   const isLoggedin = localStorage.getItem('isLoggedin');
   const userType = localStorage.getItem('userType');
-
   console.log(isLoggedin);
 
   if (isLoggedin) {
-    if (userType === 'admin')
+    if (userType === 'user')
     {
-      return <Navigate to="/usermanagement" replace />;
+      return <Navigate to="/rawlogs" replace />;
     }
-    return (
-      <>
-        <Header onOpenNav={() => setOpenNav(true)} />
-  
-        <Box
-          sx={{
-            minHeight: 1,
-            display: 'flex',
-            flexDirection: { xs: 'column', lg: 'row' },
-          }}
-        >
-          <Nav openNav={openNav} onCloseNav={() => setOpenNav(false)} />
-  
-          <Main>{children}</Main>
-        </Box>
-      </>
-    );
+      return (
+        <>
+          <Header onOpenNav={() => setOpenNav(true)} />
+          <Box
+            sx={{
+              minHeight: 1,
+              display: 'flex',
+              flexDirection: { xs: 'column', lg: 'row' },
+            }}
+          >
+            <Nav openNav={openNav} onCloseNav={() => setOpenNav(false)} />
+    
+            <Main>{children}</Main>
+          </Box>
+        </>
+      );
   }
   return <Navigate to="/" replace />;
 }
 
-DashboardLayout.propTypes = {
+AdminLayout.propTypes = {
   children: PropTypes.node,
 };

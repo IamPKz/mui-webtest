@@ -20,7 +20,7 @@ export function UseLogin (username, password){
             window.location.href = '/rawlogs'; // Replace with your user dashboard URL
           } else if (userType === 'admin') {
             // Redirect to the admin dashboard
-            window.location.href = '/404'; // Replace with your admin dashboard URL
+            window.location.href = '/usermanagement'; // Replace with your admin dashboard URL
           }
         } else {
           // Handle login failure (e.g., show an error message)
