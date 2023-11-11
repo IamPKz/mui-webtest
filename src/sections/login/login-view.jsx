@@ -55,7 +55,7 @@ export default function LoginView() {
       <Stack spacing={3}>
         <TextField 
         name="username" 
-        label="Username" 
+        label="Username or Email" 
         value={username}
         onChange={(e) => setUsername(e.target.value)} 
         autoFocus/>

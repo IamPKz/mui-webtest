@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import  { useState , useEffect}  from 'react';
+import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
@@ -11,14 +12,9 @@ import IconButton from '@mui/material/IconButton';
 
 import { UseLogout } from 'src/hooks/logout';
 
-import { account } from 'src/_mock/account';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
-  {
-    label: 'Home',
-    icon: 'eva:home-fill',
-  },
   {
     label: 'Profile',
     icon: 'eva:person-fill',
@@ -32,7 +28,27 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const [account , setAccount] = useState('S')
   const [open, setOpen] = useState(null);
+  const token = window.localStorage.getItem('token')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Make your API call here
+        const response = await axios.post('http://localhost:3000/api/user-data',{ token });
+        // Update the state with the fetched data
+        
+        setAccount(response.data[0]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, [token]);
+
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -57,15 +73,14 @@ export default function AccountPopover() {
         }}
       >
         <Avatar
-          src={account.photoURL}
-          alt={account.displayName}
+          alt={account.display_name}
           sx={{
             width: 36,
             height: 36,
             border: (theme) => `solid 2px ${theme.palette.background.default}`,
           }}
         >
-          {account.displayName.charAt(0).toUpperCase()}
+          U
         </Avatar>
       </IconButton>
 
@@ -86,7 +101,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {account.display_name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {account.email}

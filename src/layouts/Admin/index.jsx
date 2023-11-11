@@ -12,7 +12,6 @@ import Header from './header';
 
 export default function AdminLayout({ children }) {
   const [openNav, setOpenNav] = useState(false);
-
   const isLoggedin = localStorage.getItem('isLoggedin');
   const userType = localStorage.getItem('userType');
   console.log(isLoggedin);

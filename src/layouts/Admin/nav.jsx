@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import  { useState , useEffect}  from 'react';
 import PropTypes from 'prop-types';
-
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
@@ -14,8 +14,6 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { account } from 'src/_mock/account';
-
 import Scrollbar from 'src/components/scrollbar';
 
 import { NAV } from './config-layout';
@@ -23,17 +21,33 @@ import navConfig from './config-navigation';
 
 // ----------------------------------------------------------------------
 
-export default function Nav({ openNav, onCloseNav }) {
+export default function Nav({ openNav, onCloseNav}) {
+  const [account , setAccount] = useState('S')
   const pathname = usePathname();
-
+  const token = window.localStorage.getItem('token')
   const upLg = useResponsive('up', 'lg');
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Make your API call here
+        const response = await axios.post('http://localhost:3000/api/user-data',{ token });
+        // Update the state with the fetched data
+        
+        setAccount(response.data[0]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+
     if (openNav) {
       onCloseNav();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [pathname , token]);
 
   const renderAccount = (
     <Box
@@ -48,13 +62,21 @@ export default function Nav({ openNav, onCloseNav }) {
         bgcolor: (theme) => alpha(theme.palette.grey[500], 0.12),
       }}
     >
-      <Avatar src={account.photoURL} alt="photoURL" />
+      <Avatar
+          alt={account.display_name}
+          sx={{
+            width: 36,
+            height: 36,
+            border: (theme) => `solid 2px ${theme.palette.background.default}`,
+          }}
+        />
+
 
       <Box sx={{ ml: 2 }}>
-        <Typography variant="subtitle2">{account.displayName}</Typography>
+        <Typography variant="subtitle2">{account.display_name}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {account.role}
+          {account.position}
         </Typography>
       </Box>
     </Box>

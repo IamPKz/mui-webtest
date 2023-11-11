@@ -10470,57 +10470,5 @@ export const users = [
     "crscore": "50",
     "policyid": "3",
     "policytype": "DoS-policy"
-  },
-  {
-    "proto": "6",
-    "syslog_index": "<185>",
-    "message": "date=2023-11-02 time=13:26:22 devname=\"FortiGate-VM64\" devid=\"FGVMEVEM6MVTJLBA\" eventtime=1698906382705651099 tz=\"+0700\" logid=\"0720018432\" type=\"utm\" subtype=\"anomaly\" eventtype=\"anomaly\" level=\"alert\" vd=\"root\" severity=\"critical\" srcip=172.16.12.27 srccountry=\"Reserved\" dstip=172.16.12.44 srcintf=\"port1\" srcintfrole=\"wan\" sessionid=0 action=\"detected\" proto=6 service=\"tcp/64312\" count=45233 attack=\"tcp_port_scan\" srcport=63398 dstport=64312 attackid=100663398 policyid=3 policytype=\"DoS-policy\" ref=\"http://www.fortinet.com/ids/VID100663398\" msg=\"anomaly: tcp_port_scan, 1614 > threshold 200, repeats 45233 times since last log, pps 1630 of prior second\" crscore=50 craction=4096 crlevel=\"critical\"",
-    "service": "tcp/64312",
-    "eventtype": "anomaly",
-    "sessionid": "0",
-    "count": "45233",
-    "srcintfrole": "wan",
-    "srcport": "63398",
-    "tz": "+0700",
-    "attack": "tcp_port_scan",
-    "severity": "critical",
-    "srccountry": "Reserved",
-    "tags": [
-      "location_a"
-    ],
-    "ref": "http://www.fortinet.com/ids/VID100663398",
-    "devname": "FortiGate-VM64",
-    "@timestamp": "2023-11-02T06:26:22.000Z",
-    "event": {
-      "original": "<185>date=2023-11-02 time=13:26:22 devname=\"FortiGate-VM64\" devid=\"FGVMEVEM6MVTJLBA\" eventtime=1698906382705651099 tz=\"+0700\" logid=\"0720018432\" type=\"utm\" subtype=\"anomaly\" eventtype=\"anomaly\" level=\"alert\" vd=\"root\" severity=\"critical\" srcip=172.16.12.27 srccountry=\"Reserved\" dstip=172.16.12.44 srcintf=\"port1\" srcintfrole=\"wan\" sessionid=0 action=\"detected\" proto=6 service=\"tcp/64312\" count=45233 attack=\"tcp_port_scan\" srcport=63398 dstport=64312 attackid=100663398 policyid=3 policytype=\"DoS-policy\" ref=\"http://www.fortinet.com/ids/VID100663398\" msg=\"anomaly: tcp_port_scan, 1614 > threshold 200, repeats 45233 times since last log, pps 1630 of prior second\" crscore=50 craction=4096 crlevel=\"critical\""
-    },
-    "msg": "anomaly: tcp_port_scan, 1614 > threshold 200, repeats 45233 times since last log, pps 1630 of prior second",
-    "log": {
-      "syslog": {
-        "priority": 185
-      }
-    },
-    "eventtime": "1698906382705651099",
-    "srcintf": "port1",
-    "dstip": "172.16.12.44",
-    "type": "forti_log",
-    "srcip": "172.16.12.27",
-    "ftg_type": "utm",
-    "temp_time": "2023-11-02 13:26:22",
-    "date": "2023-11-02",
-    "attackid": "100663398",
-    "action": "detected",
-    "vd": "root",
-    "devid": "FGVMEVEM6MVTJLBA",
-    "crlevel": "critical",
-    "logid": "0720018432",
-    "ftg_subtype": "anomaly",
-    "level": "alert",
-    "craction": "4096",
-    "time": "13:26:22",
-    "dstport": "64312",
-    "crscore": "50",
-    "policyid": "3",
-    "policytype": "DoS-policy"
   }
 ]

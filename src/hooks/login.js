@@ -2,7 +2,7 @@ import axios from "axios"
 
 export function UseLogin (username, password){
     axios
-      .post('http://localhost:3000/login', { username, password})
+      .post('http://localhost:3000/login', { identifier : username, password})
       .then((response) => {
         console.log("success");
         if (response.status === 200 && response.data.token) {
