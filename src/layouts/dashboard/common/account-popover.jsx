@@ -12,17 +12,16 @@ import IconButton from '@mui/material/IconButton';
 
 import { UseLogout } from 'src/hooks/logout';
 
+import { Navigate } from 'react-router-dom';
+
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
 
   {
     label: 'Profile',
+    path: 'profile',
     icon: 'eva:person-fill',
-  },
-  {
-    label: 'Settings',
-    icon: 'eva:settings-2-fill',
   },
 ];
 
@@ -102,7 +101,7 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {account.display_name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {account.email}
@@ -112,7 +111,7 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         {MENU_OPTIONS.map((option) => (
-          <MenuItem key={option.label} onClick={handleClose}>
+          <MenuItem key={option.label} onClick={()=>{window.location.pathname = ("/profile")}}>
             {option.label}
           </MenuItem>
         ))}

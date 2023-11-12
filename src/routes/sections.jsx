@@ -6,11 +6,15 @@ import DashboardLayout from 'src/layouts/dashboard';
 import AdminLayout from 'src/layouts/Admin';
 
 export const IndexPage = lazy(() => import('src/pages/app'));
-export const BlogPage = lazy(() => import('src/pages/blog'));
-export const LogPage = lazy(() => import('src/pages/rawlogs'));
+export const LogPage = lazy(() => import('src/pages/parselogs'));
 export const LoginPage = lazy(() => import('src/pages/login'));
 export const ProductsPage = lazy(() => import('src/pages/products'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
+export const RawLogPage = lazy(() => import('src/pages/rawlogs'));
+export const ProfilePage = lazy(() => import('src/pages/profile'));
+export const QuizPage = lazy(() => import('src/pages/quiz'));
+export const QuizListPage = lazy(() => import('src/pages/quizlist'));
+export const BlogContentPage = lazy(() => import('src/pages/blog'));
 
 export const UserPage = lazy(() => import('src/pages/user'));
 export const QuizmanagePage = lazy(() => import('src/pages/quizmange'));
@@ -35,10 +39,13 @@ export default function Router() {
         </DashboardLayout>
       ),
       children: [
-        { path: 'rawlogs',element: <IndexPage /> },
-        { path: 'user', element: <LogPage /> },
+        { path: 'rawlogs',element: <RawLogPage /> },
+        { path: 'parselog', element: <LogPage /> },
         { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        { path: 'learning', element: <BlogContentPage /> },
+        { path: 'profile', element: <ProfilePage /> },
+        { path: 'quiz', element: <QuizListPage /> },
+        { path: 'quiz/:quizId', element: <QuizPage /> },
       ],
     },
     {

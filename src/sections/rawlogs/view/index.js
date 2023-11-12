@@ -1,1 +1,1 @@
-export { default as  LogView } from './user-view';
+export { default as  RawLogView } from './user-view';

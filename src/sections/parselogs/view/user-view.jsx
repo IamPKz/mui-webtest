@@ -33,7 +33,7 @@ export default function UserPage() {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await axios.get('http://localhost:3000/logs');
+        const response = await axios.get('http://localhost:3000/parselogs');
         // Update the state with the fetched data
         
         serlogs(response.data);
@@ -125,7 +125,7 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">logs</Typography>
+        <Typography variant="h4">Parsed Log</Typography>
       </Stack>
 
       {Visible && (

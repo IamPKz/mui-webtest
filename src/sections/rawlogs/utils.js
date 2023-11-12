@@ -50,7 +50,7 @@ export function getComparator(order, orderBy) {
 }
 
 export function applyFilter({ inputData, comparator, filterName }) {
-  const stabilizedThis = inputData.map((el, index) => [el, index]);
+  const stabilizedThis = inputData.map((el, index) => [JSON.stringify(el), index]);
 
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);

@@ -10,12 +10,12 @@ const navConfig = [
   {
     title: 'User',
     path: '/usermanagement',
-    icon: icon('ic_analytics'),
-  },
+    icon: icon('ic_user'),
+  }, 
   {
     title: 'Quiz',
     path: '/quizmanagement',
-    icon: icon('ic_user'),
+    icon: icon('test-svgrepo-com'),
   },
 ];
 

@@ -10,22 +10,22 @@ const navConfig = [
   {
     title: 'rawlogs',
     path: '/rawlogs',
-    icon: icon('ic_analytics'),
+    icon: icon('log-file-format-svgrepo-com'),
   },
   {
-    title: 'user',
-    path: '/user',
-    icon: icon('ic_user'),
+    title: 'ParseLog',
+    path: '/parselog',
+    icon: icon('parse-log-svgrepo-com'),
   },
   {
-    title: 'product',
-    path: '/products',
-    icon: icon('ic_cart'),
+    title: 'Learning',
+    path: '/learning',
+    icon: icon('anonymous-cyber-crime-criminal-hack-hacker-svgrepo-com'),
   },
   {
-    title: 'blog',
-    path: '/blog',
-    icon: icon('ic_blog'),
+    title: 'Quiz',
+    path: '/quiz',
+    icon: icon('test-svgrepo-com'),
   },
 ];
 

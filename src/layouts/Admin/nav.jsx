@@ -69,14 +69,16 @@ export default function Nav({ openNav, onCloseNav}) {
             height: 36,
             border: (theme) => `solid 2px ${theme.palette.background.default}`,
           }}
-        />
+        >
+          A
+        </Avatar>
 
 
       <Box sx={{ ml: 2 }}>
         <Typography variant="subtitle2">{account.display_name}</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {account.position}
+          {account.Position}
         </Typography>
       </Box>
     </Box>

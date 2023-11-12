@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { RawLogView } from 'src/sections/rawlogs/view';
+import { LogView } from 'src/sections/parselogs/view';
 
 // ----------------------------------------------------------------------
 
-export default function RawLogPage() {
+export default function LogPage() {
   return (
     <>
       <Helmet>
         <title> Rawlog | Minimal UI </title>
       </Helmet>
 
-      <RawLogView />
+      <LogView />
     </>
   );
 }
