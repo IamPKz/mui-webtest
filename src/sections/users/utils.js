@@ -1,7 +1,3 @@
-import axios from "axios";
-import logo from "src/components/logo";
-import { useState } from "react";
-
 export const visuallyHidden = {
   border: 0,
   margin: -1,
@@ -17,16 +13,6 @@ export const visuallyHidden = {
 export function emptyRows(page, rowsPerPage, arrayLength) {
   return page ? Math.max(0, (1 + page) * rowsPerPage - arrayLength) : 0;
 }
-
-// export function fetchDataFromAPI() {
-     
-//     const [Data,setData] = useState('')
-
-//     axios.get('http://localhost:3000/logs').then((response) => setData(response.data));
-//     console.log(Data);
-//     return Data;
-// }
-
 
 function descendingComparator(a, b, orderBy) {
   if (a[orderBy] === null) {
@@ -49,7 +35,7 @@ export function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-export function applyFilter({ inputData, comparator, filterName }) {
+export function applyFilter({ inputData, comparator }) {
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
   stabilizedThis.sort((a, b) => {
@@ -59,12 +45,6 @@ export function applyFilter({ inputData, comparator, filterName }) {
   });
 
   inputData = stabilizedThis.map((el) => el[0]);
-
-  if (filterName) {
-    inputData = inputData.filter(
-      (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
-    );
-  }
 
   return inputData;
 }

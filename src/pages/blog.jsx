@@ -1,9 +1,9 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
+
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 export default function BlogContentPage() {
 

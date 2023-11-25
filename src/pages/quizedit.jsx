@@ -1,26 +1,52 @@
 import axios from 'axios';
-import { React, useState, Fragment } from 'react';
+import { React, useState, Fragment, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import DialogContentText from '@mui/material/DialogContentText';
 
-export default function QuizmanageView() {
+export default function QuizEditView() {
+
+  const id = window.location.pathname.split("/")[2];
+  console.log(id);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Make your API call here
+        const response = await axios.get(`http://localhost:3000/api/quizzes/${id}`);
+        // Update the state with the fetched data
+        console.log(response.data);
+        setQuizName(response.data.quiz_name);
+        setQuestions(response.data.questions);
+        setQuizID(response.data.quiz_id);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    // Call the fetchData function
+    fetchData();
+  }, [id]);
+
+  const [quizID, setQuizID] = useState('');
   const [quizName, setQuizName] = useState('');
-  const [questions, setQuestions] = useState([
-    {
-      question: '',
-      answers: ['', '', '', ''],
-      correctAnswerIndex: null,
-      correctAnswerDescription: '',
-    },
-  ]);
+  const [questions, setQuestions] = useState([]);
+
+  const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(false);
+  const [questionIndexToDelete, setQuestionIndexToDelete] = useState(null);
+
 
   const isAddButtonEnabled = () => {
     console.log();
@@ -28,25 +54,26 @@ export default function QuizmanageView() {
     if (
       quizName.trim() !== '' &&
       questions.every((q) => {
-        const isQuestionEmpty = q.question.trim() === '';
-        const areAnswersEmpty = q.answers.every((answer) => answer.trim() !== '');
-        const isCorrectAnswerDescriptionEmpty = q.correctAnswerDescription.trim() === '';
-  
+        const isQuestionEmpty = q.question_text.trim() === '';
+        const areAnswersEmpty = q.answers.every((answer) => answer.answer_text.trim() !== '');
+        const isCorrectAnswerDescriptionEmpty = q.correct_answer_description.trim() === '';
+
         return !isQuestionEmpty && areAnswersEmpty && !isCorrectAnswerDescriptionEmpty;
       }) &&
-      questions.every((q) => q.correctAnswerIndex !== null)
+      questions.every((q) => q.correct_answer_index !== null)
     ) {
       return true;
     }
     return false;
   };
-  
+
 
   const handleAnswerChange = (questionIndex, answerIndex, text, field) => {
     const newQuestions = [...questions];
     if (field === 'answers') {
-      newQuestions[questionIndex][field][answerIndex] = text;
-    } else if (field === 'correctAnswerIndex') {
+      console.log(newQuestions[questionIndex][field]);
+      newQuestions[questionIndex][field][answerIndex].answer_text = text;
+    } else if (field === 'correct_answer_index') {
       newQuestions[questionIndex][field] = answerIndex;
     } else {
       newQuestions[questionIndex][field] = text;
@@ -58,39 +85,64 @@ export default function QuizmanageView() {
     setQuestions((prevQuestions) => [
       ...prevQuestions,
       {
-        question: '',
+        question_id: '',
+        question_text: '',
         description: '',
-        answers: ['', '', '', ''],
-        correctAnswerIndex: null,
-        correctAnswerDescription: '',
+        answers: [{ answer_id: '', answer_text: '' }, { answer_id: '', answer_text: '' }, { answer_id: '', answer_text: '' }, { answer_id: '', answer_text: '' }],
+        correct_answer_index: null,
+        correct_answer_description: '',
       },
     ]);
   };
 
-  const handleRemoveQuestion = (index) => {
+  const handleConfirmation = () => {
+    const questionIdToDelete = questions[questionIndexToDelete].question_id;
+  
     setQuestions((prevQuestions) => {
       const newQuestions = [...prevQuestions];
-      newQuestions.splice(index, 1);
+      newQuestions.splice(questionIndexToDelete, 1);
+  
+      if (questionIdToDelete) {
+        try {
+          axios.delete(`http://localhost:3000/api/deleteQuestion/${questionIdToDelete}`).then(() => {
+            console.log('Question deleted successfully');
+          });
+        } catch (error) {
+          console.error('Error deleting question:', error);
+        }
+      }
+  
       return newQuestions;
     });
+  
+    setIsConfirmationDialogOpen(false);
+    setQuestionIndexToDelete(null);
   };
 
-  const handleCreateQuiz = () => {
+  const handleRemoveQuestion = (index) => {
+    setQuestionIndexToDelete(index);
+    setIsConfirmationDialogOpen(true);
+  };
+
+  const handleSave = () => {
     // Combine quizName and questions data for further processing
     const quizData = {
-      quizName,
+      quiz_id: quizID,
+      quiz_name: quizName,
       questions: questions.map((q) => ({ ...q })),
     };
 
     console.log(quizData);
 
     try {
-      axios.post(`http://localhost:3000/addQuiz`, { quizName : quizData.quizName , questions : quizData.questions}).then(() => {
+      axios.post('http://localhost:3000/api/updateQuiz', { quiz_id: quizData.quiz_id, quiz_name: quizData.quiz_name, questions: quizData.questions }).then(() => {
         console.log("Success");
+        window.location.pathname = "/quizmanagement"
       });
     } catch (error) {
       console.error('Error updating user:', error);
     }
+
   };
 
   return (
@@ -122,9 +174,9 @@ export default function QuizmanageView() {
                   variant="outlined"
                   fullWidth
                   size="small"
-                  value={question.question}
+                  value={question.question_text}
                   onChange={(e) =>
-                    handleAnswerChange(questionIndex, null, e.target.value, 'question')
+                    handleAnswerChange(questionIndex, null, e.target.value, 'question_text')
                   }
                   margin="normal"
                 />
@@ -138,7 +190,7 @@ export default function QuizmanageView() {
                       variant="outlined"
                       fullWidth
                       size="small"
-                      value={answer}
+                      value={answer.answer_text}
                       onChange={(e) =>
                         handleAnswerChange(questionIndex, answerIndex, e.target.value, 'answers')
                       }
@@ -150,9 +202,9 @@ export default function QuizmanageView() {
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={question.correctAnswerIndex === answerIndex}
+                          checked={question.correct_answer_index === answerIndex}
                           onChange={() =>
-                            handleAnswerChange(questionIndex, answerIndex, null, 'correctAnswerIndex')
+                            handleAnswerChange(questionIndex, answerIndex, null, 'correct_answer_index')
                           }
                         />
                       }
@@ -168,13 +220,13 @@ export default function QuizmanageView() {
                   variant="outlined"
                   fullWidth
                   size="small"
-                  value={question.correctAnswerDescription}
+                  value={question.correct_answer_description}
                   onChange={(e) =>
                     handleAnswerChange(
                       questionIndex,
                       null,
                       e.target.value,
-                      'correctAnswerDescription'
+                      'correct_answer_description'
                     )
                   }
                   margin="normal"
@@ -211,10 +263,10 @@ export default function QuizmanageView() {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleCreateQuiz}
+            onClick={handleSave}
             disabled={!isAddButtonEnabled()}
           >
-            Create Quiz
+            Save
           </Button>
 
           <Box>
@@ -224,6 +276,25 @@ export default function QuizmanageView() {
           </Box>
         </Box>
       </Box>
+      <Dialog
+        open={isConfirmationDialogOpen}
+        onClose={() => setIsConfirmationDialogOpen(false)}
+      >
+        <DialogTitle>Confirmation</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this question?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setIsConfirmationDialogOpen(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmation} color="primary">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

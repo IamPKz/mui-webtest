@@ -1,13 +1,14 @@
 // QuizPage.js
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+
+import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import axios from 'axios';
 
 const quizData = [
   {

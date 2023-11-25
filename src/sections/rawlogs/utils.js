@@ -1,6 +1,3 @@
-import axios from "axios";
-import logo from "src/components/logo";
-import { useState } from "react";
 
 export const visuallyHidden = {
   border: 0,
@@ -18,39 +15,33 @@ export function emptyRows(page, rowsPerPage, arrayLength) {
   return page ? Math.max(0, (1 + page) * rowsPerPage - arrayLength) : 0;
 }
 
-// export function fetchDataFromAPI() {
-     
-//     const [Data,setData] = useState('')
-
-//     axios.get('http://localhost:3000/logs').then((response) => setData(response.data));
-//     console.log(Data);
-//     return Data;
-// }
-
 
 function descendingComparator(a, b, orderBy) {
-  if (a[orderBy] === null) {
+
+  if (a.event.original.match(/eventtime=(\d+)/)[1] === null) {
     return 1;
   }
-  if (b[orderBy] === null) {
+  if (b.event.original.match(/eventtime=(\d+)/)[1] === null) {
     return -1;
   }
-  if (b[orderBy] < a[orderBy]) {
+  if (b.event.original.match(/eventtime=(\d+)/)[1] < a.event.original.match(/eventtime=(\d+)/)[1]) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (b.event.original.match(/eventtime=(\d+)/)[1] > a.event.original.match(/eventtime=(\d+)/)[1]) {
     return 1;
   }
   return 0;
 }
 export function getComparator(order, orderBy) {
+
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-export function applyFilter({ inputData, comparator, filterName }) {
-  const stabilizedThis = inputData.map((el, index) => [JSON.stringify(el), index]);
+export function applyFilter({ inputData, comparator}) {
+  
+  const stabilizedThis = inputData.map((el, index) => [el, index]);
 
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -59,12 +50,6 @@ export function applyFilter({ inputData, comparator, filterName }) {
   });
 
   inputData = stabilizedThis.map((el) => el[0]);
-
-  if (filterName) {
-    inputData = inputData.filter(
-      (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
-    );
-  }
 
   return inputData;
 }

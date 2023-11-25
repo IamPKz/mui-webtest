@@ -1,5 +1,6 @@
-import { useState , useEffect } from 'react';
 import axios from 'axios';
+import { useState , useEffect } from 'react';
+
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -10,16 +11,11 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
-
-import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
-import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
-import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 
 // ----------------------------------------------------------------------
@@ -27,7 +23,7 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 
 export default function UserPage() {
 
-  const [logs , serlogs] = useState(users)
+  const [logs , serlogs] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,8 +48,6 @@ export default function UserPage() {
   const [selected, setSelected] = useState([]);
 
   const [orderBy, setOrderBy] = useState('name');
-
-  const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -108,7 +102,6 @@ export default function UserPage() {
   const dataFiltered = applyFilter({
     inputData: logs,
     comparator: getComparator(order, orderBy),
-    filterName,
   });
 
   const handleDataFromChild = (visible , data) => {
@@ -118,10 +111,7 @@ export default function UserPage() {
     console.log(Visible);
     console.log(LogDisplay);
   };
-
-
-  const notFound = !dataFiltered.length && !!filterName;
-
+    /* eslint-disable */
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -147,7 +137,11 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
+                  { id: '@timestamp', label: 'timestamp' },
+
                   { id: 'eventtype', label: 'Eventtype' },
+
+                  { id: 'attack', label: 'Attack' },
 
                   { id: 'count', label: 'Count' },
 
@@ -158,8 +152,6 @@ export default function UserPage() {
                   { id: 'srcip', label: 'Srcip' },
 
                   { id: 'tz', label: 'Time zone' },
-
-                  { id: 'attack', label: 'Attack' },
 
                   { id: 'policytype', label: 'Policy_type' },
 
@@ -176,7 +168,6 @@ export default function UserPage() {
                   { id: 'vd', label: 'vd' },
                   { id: 'craction', label: 'craction' },
                   { id: 'action', label: 'action' },
-                  { id: 'host', label: 'host' },
                   { id: 'srccountry', label: 'srccountry' },
                   { id: 'eventtime', label: 'eventtime' },
                   { id: 'ftg_type', label: 'ftg_type' },
@@ -204,7 +195,7 @@ export default function UserPage() {
                       company={row.company}
                       avatarUrl={row.avatarUrl}
                       isVerified={row.isVerified}
-
+                      time={row["@timestamp"]}
                       count={row.count}
                       attackid={row.attackid}
                       type={row.type}
@@ -228,7 +219,6 @@ export default function UserPage() {
                       vd={row.vd}
                       craction={row.craction}
                       action={row.action}
-                      host={row.host}
                       srccountry={row.srccountry}
                       eventtime={row.eventtime}
                       ftg_type={row.ftg_type}
@@ -254,7 +244,6 @@ export default function UserPage() {
                   emptyRows={emptyRows(page, rowsPerPage, logs.length)}
                 />
 
-                {notFound && <TableNoData query={filterName} />}
               </TableBody>
             </Table>
           </TableContainer>

@@ -1,5 +1,6 @@
-import { useState , useEffect } from 'react';
 import axios from 'axios';
+import { useState , useEffect } from 'react';
+
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -10,11 +11,8 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
-
 import Scrollbar from 'src/components/scrollbar';
 
-import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
@@ -24,9 +22,6 @@ import { emptyRows, applyFilter, getComparator } from '../utils';
 
 
 export default function UserPage() {
-
-  const [logs , serlogs] = useState(users)
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,19 +34,17 @@ export default function UserPage() {
         console.error('Error fetching data:', error);
       }
     };
-
+    
     fetchData();
   },[])
+  
+  const [logs , serlogs] = useState([])
 
   const [page, setPage] = useState(0);
-
+  
   const [order, setOrder] = useState('asc');
-
-  const [selected, setSelected] = useState([]);
-
+    
   const [orderBy, setOrderBy] = useState('name');
-
-  const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -79,7 +72,6 @@ export default function UserPage() {
   const dataFiltered = applyFilter({
     inputData: logs,
     comparator: getComparator(order, orderBy),
-    filterName,
   });
 
   const handleDataFromChild = (visible , data) => {
@@ -89,10 +81,6 @@ export default function UserPage() {
     console.log(Visible);
     console.log(LogDisplay);
   };
-
-
-  const notFound = !dataFiltered.length && !!filterName;
-
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -113,11 +101,9 @@ export default function UserPage() {
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={logs.length}
-                numSelected={selected.length}
                 onRequestSort={handleSort}
                 headLabel={[
-                  { id: 'eventtype', label: 'Eventtype' },
+                  { id: 'temp_time', label: 'Time' },
                   { id: '' },
                 ]}
               />
@@ -127,7 +113,8 @@ export default function UserPage() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <UserTableRow
-                      Rows={row}
+                      key={row.event.original.match(/eventtime=(\d+)/)[1]}
+                      Rows={JSON.stringify(row)}
                       sendDataToParent={handleDataFromChild}
                     />
                   ))}
@@ -137,7 +124,6 @@ export default function UserPage() {
                   emptyRows={emptyRows(page, rowsPerPage, logs.length)}
                 />
 
-                {notFound && <TableNoData query={filterName} />}
               </TableBody>
             </Table>
           </TableContainer>

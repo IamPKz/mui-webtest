@@ -1,5 +1,6 @@
-import { useState , useEffect} from 'react';
 import axios from 'axios';
+import { useState , useEffect} from 'react';
+
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -10,19 +11,14 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
-
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
-import TableNoData from '../table-no-data';
+import AddUserForm from '../Add-form-user';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
-import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
-
-import AddUserForm from '../Add-form-user';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +32,7 @@ export default function UserPage() {
         const response = await axios.get('http://localhost:3000/user-table');
         // Update the state with the fetched data
         setApi_users(response.data);
+        console.log("แทนที่");
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -52,8 +49,6 @@ export default function UserPage() {
   const [selected, setSelected] = useState([]);
 
   const [orderBy, setOrderBy] = useState('name');
-
-  const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -105,11 +100,6 @@ export default function UserPage() {
     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
-  const handleFilterByName = (event) => {
-    setPage(0);
-    setFilterName(event.target.value);
-  };
-
   const handleAddUser = async (newUserData) => {
     try {
       const response = await axios.post('http://localhost:3000/new-user', { newUserData });
@@ -128,11 +118,10 @@ export default function UserPage() {
   const dataFiltered = applyFilter({
     inputData: api_users,
     comparator: getComparator(order, orderBy),
-    filterName,
   });
 
-  const notFound = !dataFiltered.length && !!filterName;
-
+  
+  console.log(dataFiltered);
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
@@ -158,21 +147,15 @@ export default function UserPage() {
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={users.length}
+                rowCount={api_users.length}
                 numSelected={selected.length}
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-
                   { id: 'username', label: 'username' },
-
                   { id: 'password', label: 'password' },
-
                   { id: 'email', label: 'email' },
-
                   { id: 'full_name', label: 'full_name' },
-
-
                   { id: 'display_name', label: 'display_name' },
                   { id: 'age', label: 'age' },
                   { id: 'Position', label: 'Position' },
@@ -185,6 +168,7 @@ export default function UserPage() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <UserTableRow
+                      key={row.user_id}
                       user_id={row.user_id}
                       username={row.username}
                       password={row.password}
@@ -192,14 +176,11 @@ export default function UserPage() {
                       full_name={row.full_name}
                       usertype={row.usertype}
                       created_at={row.created_at}
-
                       updated_at={row.updated_at}
                       display_name={row.display_name}
                       age={row.age}
                       Position={row.Position}
                       Rows={row}
-
-
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                       onDeleteUser={onDeleteUser}
@@ -208,10 +189,9 @@ export default function UserPage() {
 
                 <TableEmptyRows
                   height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, users.length)}
+                  emptyRows={emptyRows(page, rowsPerPage, api_users.length)}
                 />
 
-                {notFound && <TableNoData query={filterName} />}
               </TableBody>
             </Table>
           </TableContainer>
@@ -220,7 +200,7 @@ export default function UserPage() {
         <TablePagination
           page={page}
           component="div"
-          count={users.length}
+          count={api_users.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
           rowsPerPageOptions={[5, 10, 20]}

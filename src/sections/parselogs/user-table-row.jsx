@@ -1,32 +1,19 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Paper from '@mui/material/Paper';
-import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import TableRow from '@mui/material/TableRow';
-import Checkbox from '@mui/material/Checkbox';
 import MenuItem from '@mui/material/MenuItem';
 import TableCell from '@mui/material/TableCell';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 
-import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
-  index,
+  time,
   selected,
   eventtype,
-  avatarUrl,
-  company,
-  role,
-  isVerified,
-  status,
-  handleClick,
-
   count,
   attackid,
   type,
@@ -34,7 +21,6 @@ export default function UserTableRow({
   tz,
   attack,
   policytype,
-
   srcintfrole,
   dstip,
   devname,
@@ -43,14 +29,12 @@ export default function UserTableRow({
   devid,
   policyid,
   srcport,
-
   tags,
-  msg,
   log,
   vd,
   craction,
   action,
-  host,
+  ip,
   srccountry,
   eventtime,
   ftg_type,
@@ -62,16 +46,11 @@ export default function UserTableRow({
   ftg_subtype,
   srcintf,
   severity,
-  events,
   Rows,
   sendDataToParent
 
 }) {
   const [open, setOpen] = useState(null);
-
-  const handleOpenMenu = (event) => {
-    setOpen(event.currentTarget);
-  };
 
   const handleCloseMenu = () => {
     setOpen(null);
@@ -81,11 +60,16 @@ export default function UserTableRow({
     sendDataToParent(true , Rows);
   };
 
+  /* eslint-disable */
   return (
     <>
       <TableRow hover tabIndex={-1} role="checkbox" selected={selected}  onClick={sendData}>
 
+        <TableCell>{time}</TableCell>
+
         <TableCell>{eventtype}</TableCell>
+
+        <TableCell>{attack}</TableCell>
 
         <TableCell>{count}</TableCell>
 
@@ -96,8 +80,6 @@ export default function UserTableRow({
         <TableCell>{srcip}</TableCell>
 
         <TableCell>{tz}</TableCell>
-
-        <TableCell>{attack}</TableCell>
 
         <TableCell>{policytype}</TableCell>
 
@@ -115,7 +97,7 @@ export default function UserTableRow({
         <TableCell>{vd}</TableCell>
         <TableCell>{craction}</TableCell>
         <TableCell>{action}</TableCell>
-        <TableCell>{host.ip}</TableCell>
+        
         <TableCell>{srccountry}</TableCell>
         <TableCell>{eventtime}</TableCell>
         <TableCell>{ftg_type}</TableCell>
@@ -156,16 +138,9 @@ export default function UserTableRow({
 }
 
 UserTableRow.propTypes = {
-  index: PropTypes.any,
-  avatarUrl: PropTypes.any,
-  company: PropTypes.any,
-  handleClick: PropTypes.func,
-  isVerified: PropTypes.any,
+  time: PropTypes.any,
   eventtype: PropTypes.any,
-  role: PropTypes.any,
   selected: PropTypes.any,
-  status: PropTypes.string,
-
   count: PropTypes.any,
   attackid: PropTypes.any,
   type: PropTypes.any,
@@ -173,7 +148,6 @@ UserTableRow.propTypes = {
   tz: PropTypes.any,
   attack: PropTypes.any,
   policytype: PropTypes.any,
-
   srcintfrole: PropTypes.any,
   dstip: PropTypes.any,
   devname: PropTypes.any,
@@ -182,14 +156,12 @@ UserTableRow.propTypes = {
   devid: PropTypes.any,
   policyid: PropTypes.any,
   srcport: PropTypes.any,
-
   tags: PropTypes.any,
-  msg: PropTypes.any,
   log: PropTypes.any,
   vd: PropTypes.any,
   craction: PropTypes.any,
   action: PropTypes.any,
-  host: PropTypes.any,
+  ip: PropTypes.any,
   srccountry: PropTypes.any,
   eventtime: PropTypes.any,
   ftg_type: PropTypes.any,
@@ -201,7 +173,6 @@ UserTableRow.propTypes = {
   ftg_subtype: PropTypes.any,
   srcintf: PropTypes.any,
   severity: PropTypes.any,
-  events: PropTypes.any,
   Rows: PropTypes.any,
   sendDataToParent: PropTypes.func,
 
