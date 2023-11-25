@@ -1,7 +1,7 @@
-// QuizEditListPage.js
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -56,9 +56,25 @@ export default function QuizEditListPage() {
 
   return (
     <div style={{ padding: '20px' }}>
+      <Helmet>
+        <title> Quiz Management | Minimal UI </title>
+      </Helmet>
+
       <Typography variant="h4" gutterBottom>
         Quiz List
       </Typography>
+
+      {/* Create Quiz Button */}
+      <Button
+        component={Link}
+        to="/createquiz"
+        variant="contained"
+        color="primary"
+        style={{ marginBottom: '20px' }}
+      >
+        Create Quiz
+      </Button>
+
       <Grid container spacing={2}>
         {quizs.map((quiz) => (
           <Grid item xs={12} sm={6} md={4} key={quiz.quiz_id}>

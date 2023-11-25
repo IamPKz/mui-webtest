@@ -15,11 +15,12 @@ export const QuizListPage = lazy(() => import('src/pages/quizlist'));
 export const BlogContentPage = lazy(() => import('src/pages/blog'));
 export const QuizEditListPage = lazy(() => import('src/pages/quizeditlist'));
 export const QuizEditView = lazy(() => import('src/pages/quizedit'));
+export const CreatequizPage = lazy(() => import('src/pages/createquiz'));
 
 export const UserPage = lazy(() => import('src/pages/user'));
 // export const FixedTable = lazy(() => import('src/pages/newuser'));
 
-export const QuizmanagePage = lazy(() => import('src/pages/quizmange'));
+export const QuizmanagePage = lazy(() => import('src/pages/createquiz'));
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -61,6 +62,7 @@ export default function Router() {
         { path: 'usermanagement',element: <UserPage />},
         { path: 'quizmanagement',element: <QuizEditListPage />},
         { path: 'editquiz/:quizId', element: <QuizEditView /> },
+        { path: 'createquiz', element: <CreatequizPage /> },
       ],
     },
     {

@@ -1,5 +1,6 @@
 // QuizPage.js
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
@@ -134,6 +135,10 @@ export default function QuizPage() {
 
   return (
     <div style={{ padding: '20px' }}>
+      <Helmet>
+        <title> Quiz | Minimal UI </title>
+      </Helmet>
+
       <Typography variant="h4" gutterBottom>
         {quizDatas[0].quiz_name}
       </Typography>

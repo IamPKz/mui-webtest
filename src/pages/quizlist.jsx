@@ -1,6 +1,7 @@
 // QuizListPage.js
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import  { useState , useEffect}  from 'react';
 
 import Card from '@mui/material/Card';
@@ -32,6 +33,10 @@ export default function QuizListPage () {
 
   return (
     <div style={{ padding: '20px' }}>
+      <Helmet>
+        <title> Quiz | Minimal UI </title>
+      </Helmet>
+
       <Typography variant="h4" gutterBottom>
         Quiz List
       </Typography>

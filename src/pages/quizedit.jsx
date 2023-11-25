@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 import { React, useState, Fragment, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
@@ -147,6 +148,10 @@ export default function QuizEditView() {
 
   return (
     <Container>
+      <Helmet>
+        <title> Edit Quiz | Minimal UI </title>
+      </Helmet>
+
       <Box position="relative">
         <Typography variant="h4" gutterBottom>
           Quiz Creator

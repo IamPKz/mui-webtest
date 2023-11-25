@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { React, useState, Fragment } from 'react';
 
 import Box from '@mui/material/Box';
@@ -10,6 +11,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
+
+// ... (import statements remain the same)
 
 export default function QuizmanageView() {
   const [quizName, setQuizName] = useState('');
@@ -23,7 +26,6 @@ export default function QuizmanageView() {
   ]);
 
   const isAddButtonEnabled = () => {
-    console.log();
     // Check if all required fields are filled
     if (
       quizName.trim() !== '' &&
@@ -31,7 +33,7 @@ export default function QuizmanageView() {
         const isQuestionEmpty = q.question.trim() === '';
         const areAnswersEmpty = q.answers.every((answer) => answer.trim() !== '');
         const isCorrectAnswerDescriptionEmpty = q.correctAnswerDescription.trim() === '';
-  
+
         return !isQuestionEmpty && areAnswersEmpty && !isCorrectAnswerDescriptionEmpty;
       }) &&
       questions.every((q) => q.correctAnswerIndex !== null)
@@ -40,7 +42,6 @@ export default function QuizmanageView() {
     }
     return false;
   };
-  
 
   const handleAnswerChange = (questionIndex, answerIndex, text, field) => {
     const newQuestions = [...questions];
@@ -85,7 +86,7 @@ export default function QuizmanageView() {
     console.log(quizData);
 
     try {
-      axios.post(`http://localhost:3000/addQuiz`, { quizName : quizData.quizName , questions : quizData.questions}).then(() => {
+      axios.post(`http://localhost:3000/addQuiz`, { quizName: quizData.quizName, questions: quizData.questions }).then(() => {
         console.log("Success");
       });
     } catch (error) {
@@ -222,8 +223,18 @@ export default function QuizmanageView() {
               Add Question
             </Button>
           </Box>
+
+          {/* Cancel Button */}
+          <Button
+            variant="contained"
+            component={Link}
+            to="/quizmanagement"
+          >
+            Cancel
+          </Button>
         </Box>
       </Box>
     </Container>
   );
 }
+
