@@ -13,6 +13,8 @@ export const ProfilePage = lazy(() => import('src/pages/profile'));
 export const QuizPage = lazy(() => import('src/pages/quiz'));
 export const QuizListPage = lazy(() => import('src/pages/quizlist'));
 export const BlogContentPage = lazy(() => import('src/pages/blog'));
+export const Learning = lazy(() => import('src/pages/learning'));
+export const Lecture1 = lazy(() => import('src/pages/lecture1'));
 export const QuizEditListPage = lazy(() => import('src/pages/quizeditlist'));
 export const QuizEditView = lazy(() => import('src/pages/quizedit'));
 export const CreatequizPage = lazy(() => import('src/pages/createquiz'));
@@ -44,7 +46,8 @@ export default function Router() {
       children: [
         { path: 'rawlogs',element: <RawLogPage /> },
         { path: 'parselog', element: <LogPage /> },
-        { path: 'learning', element: <BlogContentPage /> },
+        { path: 'learning', element: <Learning /> },
+        { path: 'lecture1', element: <Lecture1 /> },
         { path: 'profile', element: <ProfilePage /> },
         { path: 'quiz', element: <QuizListPage /> },
         { path: 'quiz/:quizId', element: <QuizPage /> },
