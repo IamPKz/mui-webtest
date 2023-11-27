@@ -3,11 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import CardContent from '@mui/material/CardContent';
 
 export default function Learning() {
     return (
@@ -20,7 +20,7 @@ export default function Learning() {
                             <Typography variant="h5" component="div">
                                 Card 1
                             </Typography>
-                            <Button component={Link} to="/path1" variant="contained" color="primary">
+                            <Button component={Link} to="/lecture1" variant="contained" color="primary">
                                 Start
                             </Button>
                         </CardContent>

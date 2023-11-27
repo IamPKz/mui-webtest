@@ -11,62 +11,61 @@ import Typography from '@mui/material/Typography';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-const quizData = [
-  {
-    quiz_id: 1,
-    quiz_name: 'Quiz 1',
-    questions: [
-      {
-        question_id: 1,
-        question_text: 'What is the capital of France?',
-        correct_answer_index: 1,
-        correct_answer_description: 'Paris is the capital of France.',
-        answers: [
-          {
-            answer_id: 1,
-            answer_text: 'Berlin',
-          },
-          {
-            answer_id: 2,
-            answer_text: 'Paris',
-          },
-          {
-            answer_id: 3,
-            answer_text: 'Madrid',
-          },
-          {
-            answer_id: 4,
-            answer_text: 'Rome',
-          },
-        ],
-      },
-      {
-        question_id: 2,
-        question_text: 'Who wrote "Romeo and Juliet"?',
-        correct_answer_index: 0,
-        correct_answer_description: 'William Shakespeare wrote "Romeo and Juliet."',
-        answers: [
-          {
-            answer_id: 5,
-            answer_text: 'William Shakespeare',
-          },
-          {
-            answer_id: 6,
-            answer_text: 'Charles Dickens',
-          },
-          {
-            answer_id: 7,
-            answer_text: 'Jane Austen',
-          },
-          {
-            answer_id: 8,
-            answer_text: 'Mark Twain',
-          },
-        ],
-      },
-    ],
-  },
-];
+const quizData =
+{
+  quiz_id: 1,
+  quiz_name: 'Quiz 1',
+  questions: [
+    {
+      question_id: 1,
+      question_text: 'What is the capital of France?',
+      correct_answer_index: 1,
+      correct_answer_description: 'Paris is the capital of France.',
+      answers: [
+        {
+          answer_id: 1,
+          answer_text: 'Berlin',
+        },
+        {
+          answer_id: 2,
+          answer_text: 'Paris',
+        },
+        {
+          answer_id: 3,
+          answer_text: 'Madrid',
+        },
+        {
+          answer_id: 4,
+          answer_text: 'Rome',
+        },
+      ],
+    },
+    {
+      question_id: 2,
+      question_text: 'Who wrote "Romeo and Juliet"?',
+      correct_answer_index: 0,
+      correct_answer_description: 'William Shakespeare wrote "Romeo and Juliet."',
+      answers: [
+        {
+          answer_id: 5,
+          answer_text: 'William Shakespeare',
+        },
+        {
+          answer_id: 6,
+          answer_text: 'Charles Dickens',
+        },
+        {
+          answer_id: 7,
+          answer_text: 'Jane Austen',
+        },
+        {
+          answer_id: 8,
+          answer_text: 'Mark Twain',
+        },
+      ],
+    },
+  ],
+}
 
 export default function QuizPage() {
   const [answers, setAnswers] = useState({});
@@ -75,7 +74,6 @@ export default function QuizPage() {
   const [quizDatas, setQuizdatas] = useState(quizData);
 
   const id = window.location.pathname.split("/")[2];
-  console.log(id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,7 +119,7 @@ export default function QuizPage() {
   const handleSubmit = () => {
     const newCorrectAnswers = {};
 
-    quizDatas[0].questions.forEach((question) => {
+    quizDatas.questions.forEach((question) => {
       const correctAnswer = question.answers[question.correct_answer_index].answer_id;
       const chosenAnswer = answers[question.question_id];
 
@@ -131,8 +129,24 @@ export default function QuizPage() {
     setCorrectAnswers(newCorrectAnswers);
     setSubmitted(true);
   };
-  console.log(quizDatas);
 
+  const handleTryAgain = () => {
+    setAnswers({});
+    setCorrectAnswers({});
+    setSubmitted(false);
+  };
+
+  const calculateScore = () => {
+    const correctCount = Object.values(correctAnswers).filter(Boolean).length;
+    return correctCount;
+  };
+
+  const getFullScore = () => quizDatas.questions.length;
+
+  const userScore = calculateScore();
+  const fullScore = getFullScore();
+
+  console.log(quizData.quiz_name);
   return (
     <div style={{ padding: '20px' }}>
       <Helmet>
@@ -140,10 +154,10 @@ export default function QuizPage() {
       </Helmet>
 
       <Typography variant="h4" gutterBottom>
-        {quizDatas[0].quiz_name}
+        {quizDatas.quiz_name}
       </Typography>
       <Grid container spacing={2}>
-        {quizDatas[0].questions.map((question) => (
+        {quizDatas.questions.map((question) => (
           <Grid item xs={12} key={question.question_id}>
             <Paper
               elevation={3}
@@ -193,15 +207,32 @@ export default function QuizPage() {
           </Grid>
         ))}
       </Grid>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleSubmit}
-        style={{ marginTop: '20px' }}
-        disabled={submitted}
-      >
-        Submit Quiz
-      </Button>
+      {submitted && (
+        <div style={{ marginTop: '20px' }}>
+          <Typography variant="h6">
+            Your Score: {userScore}/{fullScore}
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleTryAgain}
+            style={{ marginTop: '10px' }}
+          >
+            Try Again
+          </Button>
+        </div>
+      )}
+      {!submitted && (
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          style={{ marginTop: '20px' }}
+          disabled={submitted}
+        >
+          Submit Quiz
+        </Button>
+      )}
     </div>
   );
 }

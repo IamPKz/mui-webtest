@@ -273,7 +273,6 @@ export default function QuizEditView() {
           >
             Save
           </Button>
-
           <Box>
             <Button variant="contained" color="primary" onClick={handleAddQuestion}>
               Add Question

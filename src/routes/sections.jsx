@@ -14,10 +14,14 @@ export const QuizPage = lazy(() => import('src/pages/quiz'));
 export const QuizListPage = lazy(() => import('src/pages/quizlist'));
 export const BlogContentPage = lazy(() => import('src/pages/blog'));
 export const Learning = lazy(() => import('src/pages/learning'));
-export const Lecture1 = lazy(() => import('src/pages/lecture1'));
 export const QuizEditListPage = lazy(() => import('src/pages/quizeditlist'));
 export const QuizEditView = lazy(() => import('src/pages/quizedit'));
 export const CreatequizPage = lazy(() => import('src/pages/createquiz'));
+
+export const Lecture1 = lazy(() => import('src/pages/lecture1'));
+export const Lecture2 = lazy(() => import('src/pages/lecture2'));
+export const Lecture3 = lazy(() => import('src/pages/lecture3'));
+
 
 export const UserPage = lazy(() => import('src/pages/user'));
 // export const FixedTable = lazy(() => import('src/pages/newuser'));
@@ -48,6 +52,8 @@ export default function Router() {
         { path: 'parselog', element: <LogPage /> },
         { path: 'learning', element: <Learning /> },
         { path: 'lecture1', element: <Lecture1 /> },
+        { path: 'lecture2', element: <Lecture2 /> },
+        { path: 'lecture3', element: <Lecture3 /> },
         { path: 'profile', element: <ProfilePage /> },
         { path: 'quiz', element: <QuizListPage /> },
         { path: 'quiz/:quizId', element: <QuizPage /> },

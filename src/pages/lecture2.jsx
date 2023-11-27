@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-export default function Lecture1() {
+export default function Lecture2() {
 
     return (
         <Container>
@@ -433,21 +433,28 @@ export default function Lecture1() {
                         </Box>
                     </Typography>
                 </Typography>
+
                 <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                marginTop: '16px',
-              }}
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                component={Link} to="/lecture2"
-              >
-                Next
-              </Button>
-            </Box>
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        component={Link} to="/lecture1"
+                    >
+                        Back
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        component={Link} to="/lecture3"
+                    >
+                        Next
+                    </Button>
+                </Box>
             </Paper>
         </Container>
     );
