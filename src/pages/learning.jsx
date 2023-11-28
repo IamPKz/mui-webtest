@@ -11,21 +11,6 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
-const renderImg = (
-    <Box
-      component="img"
-      alt="text test"
-      src="/assets/Llist/fortinet-social-icon.jpg"
-      sx={{
-        top: 0,
-        width: 1,
-        height: 1,
-        objectFit: 'cover',
-        position: 'absolute',
-      }}
-    />
-  );
-
 export default function Learning() {
     return (
         <Container>
@@ -34,12 +19,23 @@ export default function Learning() {
                 <Grid item xs={12} sm={12} md={4}>
                     <Card>
                         <Box sx={{ pt: '100%', position: 'relative' }}>
-                            {renderImg}
+                            <Box
+                                component="img"
+                                alt="text test"
+                                src="/assets/Llist/fortinet-social-icon.jpg"
+                                sx={{
+                                    top: 0,
+                                    width: 1,
+                                    height: 1,
+                                    objectFit: 'cover',
+                                    position: 'absolute',
+                                }}
+                            />
                         </Box>
 
                         <Stack spacing={2} sx={{ p: 3 }}>
                             <Typography color="inherit" underline="hover" variant="h5" noWrap>
-                                FortiGate
+                                FortiGate Firewall
                             </Typography>
                             <Button component={Link} to="/lecture1" variant="contained" color="primary">
                                 Learn
@@ -50,29 +46,59 @@ export default function Learning() {
 
                 {/* Row 2 */}
                 <Grid item xs={12} sm={12} md={4}>
-                    <Card fullWidth>
-                        <CardContent>
-                            <Typography variant="h5" component="div">
-                                Card 2
+                    <Card>
+                        <Box sx={{ pt: '100%', position: 'relative' }}>
+                            <Box
+                                component="img"
+                                alt="text test"
+                                src="/assets/Llist/Kali_Linux.jpg"
+                                sx={{
+                                    top: 0,
+                                    width: 1,
+                                    height: 1,
+                                    objectFit: 'cover',
+                                    position: 'absolute',
+                                }}
+                            />
+                        </Box>
+
+                        <Stack spacing={2} sx={{ p: 3 }}>
+                            <Typography color="inherit" underline="hover" variant="h5" noWrap>
+                                Kali tools
                             </Typography>
                             <Button component={Link} to="/lecture2" variant="contained" color="primary">
                                 Learn
                             </Button>
-                        </CardContent>
+                        </Stack>
                     </Card>
                 </Grid>
 
                 {/* Row 3 */}
                 <Grid item xs={12} sm={12} md={4}>
-                    <Card fullWidth>
-                        <CardContent>
-                            <Typography variant="h5" component="div">
-                                Card 3
+                    <Card>
+                        <Box sx={{ pt: '100%', position: 'relative' }}>
+                            <Box
+                                component="img"
+                                alt="text test"
+                                src="/assets/Llist/hacker.jpeg"
+                                sx={{
+                                    top: 0,
+                                    width: 1,
+                                    height: 1,
+                                    objectFit: 'cover',
+                                    position: 'absolute',
+                                }}
+                            />
+                        </Box>
+
+                        <Stack spacing={2} sx={{ p: 3 }}>
+                            <Typography color="inherit" underline="hover" variant="h5" noWrap>
+                                Attack and Read logs
                             </Typography>
                             <Button component={Link} to="/lecture3" variant="contained" color="primary">
                                 Learn
                             </Button>
-                        </CardContent>
+                        </Stack>
                     </Card>
                 </Grid>
             </Grid>

@@ -21,6 +21,10 @@ import {
     portSpecificationData
 } from '../_mock/nmapCommands'
 
+import {
+    additionalCommands1
+} from '../_mock/h3ping'
+
 const NmapScanTable = ({ data, title }) => {
     return (
         <Container>
@@ -400,13 +404,14 @@ export default function Lecture2() {
                             <Box sx={{ paddingTop: 5, paddingBottom: 1 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                     <img
-                                        src="/assets/L1_pic/Kali_IP.jpg"
+                                        src="/assets/L2_pic/h3ping.jpg"
                                         alt="System"
                                     />
                                 </Box>
-                                <Typography sx={{ paddingTop: 2, display: 'flex', justifyContent: 'center' }} variant="subtitle1">
-                                    พิมคำสั่ง : get system interface physical
-                                </Typography>
+                            </Box>
+
+                            <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                                <NmapScanTable data={additionalCommands1} title='DoS' />
                             </Box>
                         </Typography>
                     </Typography>
