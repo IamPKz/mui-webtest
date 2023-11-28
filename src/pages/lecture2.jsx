@@ -18,15 +18,7 @@ import TableContainer from '@mui/material/TableContainer';
 
 import {
     nmapScanTechniques,
-    targetSpecificationData,
-    hostDiscoveryData,
-    portSpecificationData,
-    serviceVersionDetectionData,
-    osDetectionData,
-    timingPerformanceData,
-    nseScriptsData,
-    evasionSpoofingData,
-    outputData,
+    portSpecificationData
 } from '../_mock/nmapCommands'
 
 const NmapScanTable = ({ data, title }) => {
@@ -58,6 +50,7 @@ const NmapScanTable = ({ data, title }) => {
         </Container>
     );
 };
+
 NmapScanTable.propTypes = {
     data: PropTypes.arrayOf(
         PropTypes.shape({
@@ -171,15 +164,171 @@ export default function Lecture2() {
                     </Typography>
                 </Typography>
 
+                <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
+                    <Typography variant="h5">
+                        เชื่อมต่อด้วย SSH
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <img
+                                src="/assets/L2_pic/putty_ip.jpg"
+                                alt="System"
+                            />
+                        </Box>
+                        <Typography sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
+                            ใส่ IP ของเครื่อง Kali เพื่อเชื่อมต่อด้วย SSH
+                        </Typography>
+
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            <img
+                                src="/assets/L2_pic/kali_login.jpg"
+                                alt="System"
+                            />
+                        </Box>
+                        <Typography sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
+                            Login ด้วย Username , Password : kali
+                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2 }}>
+                            <img
+                                src="/assets/L2_pic/kali_logedin.jpg"
+                                alt="System"
+                            />
+                        </Box>
+                        <Typography sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
+                            Login สำเร็จ
+                        </Typography>
+
+                        <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2 }}>
+                            <img
+                                src="/assets/L2_pic/kali_nmap.jpg"
+                                alt="System"
+                            />
+                        </Box>
+                        <Typography sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
+                            ทดลองใช้คำสั่ง : nmap (ตามด้วย IP ของ Firewall)
+                        </Typography>
+
+                        <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2 }}>
+                            <img
+                                src="/assets/L2_pic/kali_needroot_nmap.jpg"
+                                alt="System"
+                            />
+                        </Box>
+                        <Typography sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
+                            หากบางคำสั่งต้องการ root privileges ให้พิมคำสั่ง sudo -i และใส่รหัส : kali
+                        </Typography>
+
+                    </Typography>
+                </Typography>
+
+
                 <Divider variant="middle" />
 
                 <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
                     <Typography variant="h4">
                         การลาดตระเวณ (Reconnaissance)
                         <Typography sx={{ paddingTop: 2, paddingBottom: 5 }} variant="h5">
-                            Nmap
                             <Typography>
-                                Nmap (“Network Mapper”) tool นี้เป็น free license และ เป็น open source ทำหน้าที่ ค้นหาเครือข่ายเป้าหมายและใช้ตรวจสอบความปลอดภัยของเครือข่าย
+                                Reconnaissance (หรือ Recon) ในทางความหมายทางความปลอดภัยข้อมูลและความปลอดภัยด้านไซเบอร์หมายถึงกระบวนการในการเก็บข้อมูลและสารสนเทศเกี่ยวกับเป้าหมายหรือเครือข่ายที่จะถูกทดสอบความปลอดภัย. การทำ Reconnaissance มักเป็นขั้นตอนแรกในกระบวนการทดสอบความปลอดภัย (penetration testing) หรือการโจมตีทางไซเบอร์
+                            </Typography>
+                            <Typography sx={{ paddingTop: 2, paddingBottom: 2 }}>
+                                Reconnaissance ในทางความปลอดภัยข้อมูลและความปลอดภัยด้านไซเบอร์มีการแบ่งออกเป็นสองประเภทหลัก: Active Reconnaissance และ Passive Reconnaissance
+                            </Typography>
+                            <Typography sx={{ paddingTop: 2, paddingBottom: 2 }} variant="h6">
+                                Active Reconnaissance:
+                                <Typography sx={{ paddingTop: 2, paddingBottom: 1 }}>
+                                    ลักษณะ: Active Reconnaissance เป็นกระบวนการที่ผู้ทดสอบหรือผู้โจมตีกระทำเพื่อเก็บข้อมูลโดยตรงจากเป้าหมายโดยใช้การสื่อสารหรือการเข้าถึงที่เป้าหมาย
+                                </Typography>
+                                <Typography sx={{ paddingBottom: 2 }}>
+                                    ตัวอย่าง: การสแกนพอร์ต, การทดสอบระบบที่มีการส่งข้อมูลผลลัพธ์กลับ, การทดสอบโปรโตคอลเครือข่าย, หรือการใช้เทคนิคต่าง ๆ เพื่อเก็บข้อมูลที่ต้องการ.
+                                    Passive Reconnaissance (การสำรวจแบบไม่ใช้งาน):
+                                </Typography>
+                            </Typography>
+
+                            <Typography sx={{ paddingBottom: 2 }} variant="h6">
+                                Passive Reconnaissance:
+                                <Typography sx={{ paddingTop: 2, paddingBottom: 1 }}>
+                                    ลักษณะ: Passive Reconnaissance เป็นกระบวนการที่ผู้ทดสอบหรือผู้โจมตีไม่ต้องทำการสื่อสารหรือเข้าถึงทางเป้าหมายโดยตรง แต่เพียงแค่รับข้อมูลที่เป้าหมายส่งมา.                                </Typography>
+                                <Typography sx={{ paddingBottom: 2 }}>
+                                    ตัวอย่าง: การตรวจสอบข้อมูลที่เป้าหมายโพสต์ในสื่อสังคมออนไลน์, การจับรายการเครือข่าย, หรือการวิเคราะห์ข้อมูล DNS.
+                                </Typography>
+                            </Typography>
+                            <Typography sx={{ paddingLeft: 5, padding: 1 }}>
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    1.Nmap (Network Mapper):
+                                    <Typography>
+                                        ใช้สแกนพอร์ตและตรวจสอบเครือข่ายเพื่อหาข้อมูลเกี่ยวกับเครื่องเซิร์ฟและระบบ.
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    2.Recon-ng
+                                    <Typography>
+                                        เป็นเครื่องมือทำ Reconnaissance ที่ออกแบบมาสำหรับการทำงานกับข้อมูลที่ได้จากเครื่องมือ Reconnaissance ต่าง ๆ
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    3.TheHarvester
+                                    <Typography>
+                                        ใช้ในการเก็บอีเมล, โดเมน, และข้อมูลที่เป็นไปได้จากแหล่งข้อมูลสาธารณะ
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    4.Maltego
+                                    <Typography>
+                                        เครื่องมือสร้างกราฟที่ใช้ในการวิเคราะห์ข้อมูลที่ได้จาก Reconnaissance และสร้างภาพรวมของเป้าหมาย
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    5.Wireshark
+                                    <Typography>
+                                        เครื่องมือการวิเคราะห์แพ็กเก็ตเครือข่ายที่สามารถใช้ใน Passive Reconnaissance
+                                    </Typography>
+                                </Typography>
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    6.Metasploit Framework:
+                                    <Typography>
+                                        จะมีเครื่องมือที่ช่วยในการ Reconnaissance รวมทั้งการสแกน, การเจาะระบบ, และการบริหารจัดการการเข้าถึง
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    7.Shodan
+                                    <Typography>
+                                        ใช้ในการค้นหาอุปกรณ์ที่เชื่อมต่อกับอินเทอร์เน็ต, รวมถึงข้อมูลที่เป็นประโยชน์เกี่ยวกับพอร์ตและบริการ
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    8.EyeWitness
+                                    <Typography>
+                                        ใช้สร้างภาพหน้าจอ (screenshots) จากเว็บไซต์ที่เป้าหมาย
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    9.SpiderFoot
+                                    <Typography>
+                                        เครื่องมือ Open Source Intelligence (OSINT) ที่สามารถเก็บข้อมูลจากหลายแหล่งและวิเคราะห์ข้อมูลนั้น
+                                    </Typography>
+                                </Typography>
+
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    10.Snort
+                                    <Typography>
+                                        ระบบตรวจจับการบุกรุก (Intrusion Detection System - IDS) ที่สามารถใช้ในการตรวจสอบและบันทึกข้อมูลจากที่ผ่านมาในเครือข่าย
+                                    </Typography>
+                                </Typography>
+                            </Typography>
+
+
+                            <Divider variant="middle" />
+                            <Typography variant="h6" sx={{ paddingTop: 5, paddingBottom: 2 }}>
+                                Nmap (“Network Mapper”)
+                            </Typography>
+                            <Typography>
+                                Nmap (Network Mapper) เป็นเครื่องมือสแกนเน็ตเวิร์คและตรวจสอบพอร์ต (port scanner) ที่ใช้ในการตรวจสอบเครือข่ายและระบบความปลอดภัย. มันถูกออกแบบมาเพื่อสแกนและตรวจสอบเครือข่ายเพื่อค้นหารายละเอียดเกี่ยวกับเครื่องเซิร์ฟ, แอพลิเคชัน, และบริการที่กำลังทำงานบนระบบ
                             </Typography>
                             <Box sx={{ paddingBottom: 5, paddingTop: 5 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -189,63 +338,37 @@ export default function Lecture2() {
                                     />
                                 </Box>
                             </Box>
-                            <Typography>
-                                Nmap Network Scanning (NNS) ค้นหาเป้าหมายภายในเครือข่าย
-                            </Typography>
-                            <Typography sx={{ paddingTop: 2 }}>
-                                <Typography>
-                                    - หา IP เครื่องที่ที่ยังทำงานอยู่หรือเปิดเครื่องเสียบปลั๊ก Network อยู่เท่านั้น กรณีเครื่องที่ปิดหรือ down อยู่ไม่สามารถค้นหาได้
-                                </Typography>
-                                <Typography>
-                                    - หา Port ของเครื่องเป้าหมายว่ามี port ใหนเปิดอยู่บ้าง และเราจะโจมตีได้ทั้งหมดกี่ Port
-                                </Typography>
-                                <Typography>
-                                    -หา OS/Version ของเครื่องเป้าหมายว่าเป็นระบบปฏิบัติการอะไร เช่น Linux 7.x, Windows Server 2xxx เป็นต้น
+                            <Typography sx={{ paddingLeft: 5, padding: 1 }}>
+                                <Typography variant="h6" sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                    Nmap สามารถทำหลายอย่างได้, รวมถึง:
+                                    <Typography sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                        1.สแกนพอร์ต (Port Scanning): Nmap สามารถสแกนพอร์ตบนเครือข่ายเพื่อตรวจสอบว่าพอร์ตไหนถูกเปิดหรือปิด
+                                    </Typography>
+                                    <Typography sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                        2.ตรวจสอบระบบปฏิบัติการ (OS Fingerprinting): Nmap สามารถพยายามระบุระบบปฏิบัติการที่กำลังทำงานบนเครื่องเซิร์ฟโดยการวิเคราะห์การตอบสนองจากระบบ
+                                    </Typography>
+                                    <Typography sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                        3.ตรวจสอบเวอร์ชันของบริการ (Service Version Detection): Nmap สามารถระบุเวอร์ชันของบริการที่ทำงานบนพอร์ตที่กำลังทดสอบ
+                                    </Typography>
+                                    <Typography sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                        4.สแกนเครือข่าย (Host Discovery): สามารถใช้ Nmap เพื่อค้นหาและสแกนเครือข่ายในขณะที่ตรวจสอบเครื่องที่ออนไลน์
+                                    </Typography>
+                                    <Typography sx={{ paddingLeft: 2, paddingBottom: 2 }}>
+                                        5.สแกนไฟร์วอลล์ (Firewall Evasion): Nmap มีฟีเจอร์ที่ช่วยในการหลีกเลี่ยงไฟร์วอลล์และการตรวจจับการสแกน
+                                    </Typography>
                                 </Typography>
                             </Typography>
                         </Typography>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={targetSpecificationData} title='Target Specification' />
-                        </Box>
+                        <Typography variant="h6" sx={{ paddingTop: 5, paddingBottom: 2 }}>
+                        ตัวอย่างการใช้ Nmap เพื่อ Scan port ที่เปิดอยู่โดยใช้คำสั่งแต่ละรูปแบบ
+                        </Typography>
 
                         <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
                             <NmapScanTable data={nmapScanTechniques} title='Nmap Scan Techniques' />
                         </Box>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={hostDiscoveryData} title='Host Discovery' />
-                        </Box>
-
                         <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
                             <NmapScanTable data={portSpecificationData} title='Port Specification' />
                         </Box>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={serviceVersionDetectionData} title='Service and Version Detection' />
-                        </Box>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={osDetectionData} title='OS Detection' />
-                        </Box>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={timingPerformanceData} title='Timing and Performance' />
-                        </Box>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={nseScriptsData} title='NSE Scripts' />
-                        </Box>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={evasionSpoofingData} title='Firewall / IDS Evasion and Spoofing' />
-                        </Box>
-
-                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                            <NmapScanTable data={outputData} title='Output' />
-                        </Box>
-
-                        <Divider variant="middle" />
                     </Typography>
                 </Typography>
 
@@ -284,197 +407,10 @@ export default function Lecture2() {
                         </Typography>
                     </Typography>
 
-                    <Typography sx={{ paddingTop: 2 }} variant="h5">
-                        Login
-                        <Box sx={{ paddingTop: 2 }} >
-                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <img
-                                    src="/assets/L1_pic/FG/login2.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-                            <Typography sx={{ paddingBottom: 2, paddingTop: 2, display: 'flex', justifyContent: 'center' }} variant="subtitle1">
-                                Login ด้วย Username และ Password admin
-                            </Typography>
-                        </Box>
-                    </Typography>
+                    
+                    
+                    
                     <Divider variant="middle" />
-                    <Typography sx={{ paddingTop: 5 }} variant="h5">
-                        การตั้งค่าเพื่อตรวจจับความผิดปกติ (Anomaly Detection)
-                        <Box sx={{ paddingTop: 2 }} >
-                            <Typography>
-                                ในบทเรียนนี้จะสอนการตั้งค่าความผิดปกติจากการโจมตี 2 ประเภทได้แก่
-                            </Typography>
-                            <Typography sx={{ paddingLeft: 5, padding: 1 }}>
-                                <Typography>
-                                    1.Reconnaissance
-                                </Typography>
-                                <Typography>
-                                    2.Denial of service
-                                </Typography>
-                            </Typography>
-
-                            <Typography>
-                                ไปที่ Policy & Objects → IPv4 DoS Policy
-                            </Typography>
-                            <Typography>
-                                Click ที่ Create New
-                            </Typography>
-
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
-                                <img
-                                    src="/assets/L1_pic/FG/DoS policy.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-
-                            <Typography>
-                                - ตั้งชื่อให้กับ Policy นี้
-                            </Typography>
-                            <Typography>
-                                - เลือก Port ของFirewall ที่ต้องการตรวจจับ Traffic (เลือก WAN)
-                            </Typography>
-                            <Typography>
-                                - เลือกอนุญาตทุก Sorce Address (IP อุปกรณ์ที่เข้ามาเชื่อมต่อ)
-                            </Typography>
-                            <Typography>
-                                - เลือกอนุญาตทุก Destination Address (IP อุปกรณ์ที่ต้องการเชื่อมต่อ)
-                            </Typography>
-                            <Typography>
-                                - เลือกอนุญาตทุก Service
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
-                                <img
-                                    src="/assets/L1_pic/FG/DoS_Name.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-                            <Typography>
-                                เลื่อนลงมาที่ L4 Anomailes
-                            </Typography>
-                            <Typography>
-                                เปิดใช้งาน Logging ประเภท Flood เพื่อตรวจจับการโจมตีประเภท DoS
-                            </Typography>
-                            <Typography>
-                                เปิดใช้งาน Logging ประเภท Scan เพื่อตรวจจับการโจมตีประเภท Recon
-                            </Typography>
-                            <Typography>
-                                เลือก Block Event ประเภท Flood และ Monitor Event ประเภท scan
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
-                                <img
-                                    src="/assets/L1_pic/FG/DoS_Treshold.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-                            <Typography>
-                                Threshold หมายถึง ค่าที่กำหนดไว้เพื่อบอกว่าเหตุการณ์หรือกิจกรรมใดๆ ในระบบคอมพิวเตอร์หรือเครือข่ายมีความเสี่ยงหรือไม่เสี่ยงต่อความปลอดภัยของระบบนั้น ๆ หรือไม่ ซึ่ง Threshold ในส่วนนี้เป็นเกณฑ์กำหนดเพื่อดำเนินการหากจำนวนเหตุการณ์ถึงเกณฑ์ที่กำหนดไว้
-                            </Typography>
-
-                            <Typography sx={{ paddingTop: 2, paddingBottom: 5 }}>
-                                หลังจากนั้นกด Apply เพื่อบันทึก Policy ที่ได้สร้างขึ้นใหม่
-                            </Typography>
-
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
-                                <img
-                                    src="/assets/L1_pic/FG/DoS_succ.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-                        </Box>
-                    </Typography>
-                    <Divider variant="middle" />
-                    <Typography sx={{ paddingTop: 5 }} variant="h5">
-                        การตั้งค่าให้ Firewall ส่ง Syslog ไปยัง Syslog server เพื่อนำLog ไปแสดงบนเว็บ
-                        <Box sx={{ paddingTop: 2 }} >
-                            <Typography>
-                                หลังจากที่เราตั้งค่าให้ Firewall สามารถตรวจจับความผิดปกติได้แล้ว เราจะต้องตั้งค่าเพื่อนำ Log ที่เกิดขึ้นส่งไปยัง Syslog Server โดยเปิด CLI ที่มุมขวาบนของเว็บ
-                            </Typography>
-
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
-                                <img
-                                    src="/assets/L1_pic/FG/CLI.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-
-                            <Typography>
-                                โดยในเนื้อหานี้ จะส่ง Log ไปทั้งหมด 2 Port เพื่อแสดง Log ที่เป็น Rawlog และ Parse Log (Log ที่ผ่านการตัดเฉพาะส่วนสำคัญแล้ว)
-                            </Typography>
-                            <Typography>
-                                โดย Port ที่จะส่งไปได้แก่
-                            </Typography>
-                            <Box sx={{ paddingLeft: 2, paddingBottom: 5 }}>
-
-                                <Typography>
-                                    - Port 5144
-                                </Typography>
-                                <Typography>
-                                    - Port 5145
-                                </Typography>
-                            </Box>
-                            <Typography variant="h5" sx={{ paddingBottom: 1 }}>
-                                ตั้งค่า Port 5144 :
-                            </Typography>
-                            <Typography>
-                                config log syslogd setting
-                            </Typography>
-                            <Typography>
-                                set status enable
-                            </Typography>
-                            <Typography>
-                                set server (ตามด้วย IP ของ Web server)
-                            </Typography>
-                            <Typography>
-                                set port 5144
-                            </Typography>
-                            <Typography>
-                                end
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
-                                <img
-                                    src="/assets/L1_pic/FG/CLI_5144.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-
-                            <Typography variant="h5" sx={{ paddingBottom: 1 }}>
-                                ตั้งค่า Port 5145 :
-                            </Typography>
-                            <Typography>
-                                config log syslogd2 setting (Tab ที่ syslogd 1 ครั้งจะกลายเป็น syslogd2)
-                            </Typography>
-                            <Typography>
-                                set status enable
-                            </Typography>
-                            <Typography>
-                                set server (ตามด้วย IP ของ Web server)
-                            </Typography>
-                            <Typography>
-                                set port 5145
-                            </Typography>
-                            <Typography>
-                                end
-                            </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 5 }}>
-                                <img
-                                    src="/assets/L1_pic/FG/CLI_5145.jpg"
-                                    alt="System"
-                                />
-                            </Box>
-
-
-                            <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2, paddingBottom: 2 }}>
-                                <img
-                                    src="/assets/Firewall to Webserver.jpeg"
-                                    alt="System"
-                                />
-                            </Box>
-                            <Typography>
-                                จากนั้น ระบบจะเริ่มเชื่อมต่อและส่ง Log ไปยัง Syslog Server (Ubuntu) โดยจะมี Logstash Service ทำหน้าที่เป็น Pipeline Processor รออยู่ 2 Port หลังจากดำเนินการเสร็จ Logstash จะ Save Log ลงใน File และนำไปแสดงบนหน้าเว็บ
-                            </Typography>
-                        </Box>
-                    </Typography>
                 </Typography>
 
                 <Box
