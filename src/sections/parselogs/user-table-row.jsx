@@ -72,6 +72,7 @@ export default function UserTableRow({
         <TableCell>{attack}</TableCell>
 
         <TableCell>{count}</TableCell>
+        <TableCell>{action}</TableCell>
 
         <TableCell>{attackid}</TableCell>
 
@@ -96,7 +97,6 @@ export default function UserTableRow({
         <TableCell>{log.syslog.priority}</TableCell>
         <TableCell>{vd}</TableCell>
         <TableCell>{craction}</TableCell>
-        <TableCell>{action}</TableCell>
         
         <TableCell>{srccountry}</TableCell>
         <TableCell>{eventtime}</TableCell>

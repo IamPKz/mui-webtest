@@ -137,13 +137,14 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: '@timestamp', label: 'timestamp' },
+                  { id: 'temp_time', label: 'timestamp' },
 
                   { id: 'eventtype', label: 'Eventtype' },
 
                   { id: 'attack', label: 'Attack' },
 
                   { id: 'count', label: 'Count' },
+                  { id: 'action', label: 'action' },
 
                   { id: 'attackid', label: 'Attackid' },
 
@@ -167,7 +168,6 @@ export default function UserPage() {
                   { id: 'priority', label: 'priority' },
                   { id: 'vd', label: 'vd' },
                   { id: 'craction', label: 'craction' },
-                  { id: 'action', label: 'action' },
                   { id: 'srccountry', label: 'srccountry' },
                   { id: 'eventtime', label: 'eventtime' },
                   { id: 'ftg_type', label: 'ftg_type' },
@@ -195,7 +195,7 @@ export default function UserPage() {
                       company={row.company}
                       avatarUrl={row.avatarUrl}
                       isVerified={row.isVerified}
-                      time={row["@timestamp"]}
+                      time={row.temp_time}
                       count={row.count}
                       attackid={row.attackid}
                       type={row.type}

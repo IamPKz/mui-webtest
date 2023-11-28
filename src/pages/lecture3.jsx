@@ -14,7 +14,7 @@ export default function Lecture3() {
         <Container>
             <Paper sx={{ padding: 5 }}>
                 <Typography variant="h4" gutterBottom>
-                    Firewall
+                    Attack and Read Log
                 </Typography>
 
                 <Typography variant="subtitle1" color="textSecondary" paragraph>

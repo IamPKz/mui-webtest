@@ -359,8 +359,9 @@ export default function Lecture2() {
                                 </Typography>
                             </Typography>
                         </Typography>
+
                         <Typography variant="h6" sx={{ paddingTop: 5, paddingBottom: 2 }}>
-                        ตัวอย่างการใช้ Nmap เพื่อ Scan port ที่เปิดอยู่โดยใช้คำสั่งแต่ละรูปแบบ
+                            ตัวอย่างการใช้ Nmap เพื่อ Scan port ที่เปิดอยู่โดยใช้คำสั่งแต่ละรูปแบบ
                         </Typography>
 
                         <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
@@ -369,6 +370,9 @@ export default function Lecture2() {
                         <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
                             <NmapScanTable data={portSpecificationData} title='Port Specification' />
                         </Box>
+                    </Typography>
+                    <Typography>
+                        ตัวอย่างการใช้งานอื่นๆ <a href="/lecture3" rel="noreferrer" target="_blank"> HERE </a>
                     </Typography>
                 </Typography>
 
@@ -407,9 +411,9 @@ export default function Lecture2() {
                         </Typography>
                     </Typography>
 
-                    
-                    
-                    
+
+
+
                     <Divider variant="middle" />
                 </Typography>
 
