@@ -1,20 +1,80 @@
+/* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
+import Table from '@mui/material/Table';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 import Container from '@mui/material/Container';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
 import Typography from '@mui/material/Typography';
+import TableContainer from '@mui/material/TableContainer';
 
+import {
+    nmapScanTechniques,
+    targetSpecificationData,
+    hostDiscoveryData,
+    portSpecificationData,
+    serviceVersionDetectionData,
+    osDetectionData,
+    timingPerformanceData,
+    nseScriptsData,
+    evasionSpoofingData,
+    outputData,
+} from '../_mock/nmapCommands'
+
+const NmapScanTable = ({ data, title }) => {
+    return (
+        <Container>
+            <Typography variant="h4" gutterBottom>
+                {title}
+            </Typography>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>OPTION</TableCell>
+                            <TableCell>EXAMPLE</TableCell>
+                            <TableCell>DESCRIPTION</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((technique, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{technique.switch}</TableCell>
+                                <TableCell>{technique.example}</TableCell>
+                                <TableCell>{technique.description}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Container>
+    );
+};
+NmapScanTable.propTypes = {
+    data: PropTypes.arrayOf(
+        PropTypes.shape({
+            switch: PropTypes.string.isRequired,
+            example: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+    title: PropTypes.string.isRequired
+};
 export default function Lecture2() {
 
     return (
         <Container>
             <Paper sx={{ padding: 5 }}>
                 <Typography variant="h4" gutterBottom>
-                    Firewall
+                    Kali
                 </Typography>
 
                 <Typography variant="subtitle1" color="textSecondary" paragraph>
@@ -22,88 +82,51 @@ export default function Lecture2() {
                 </Typography>
 
                 <Typography variant="body1" paragraph>
-                    <Typography variant="h5">
-                        Firewall
-                    </Typography>
-                    Firewall คือ ซอฟต์แวร์หรือฮาร์ดแวร์ บนระบบเครือข่าย ที่ทำหน้าที่ตรวจสอบข้อมูลที่ผ่านเข้า-ออกระบบเครือข่าย จะมีการกำหนดกฎ เพื่อควบคุมการเข้า-ออกของข้อมูล เป็นการป้องกันว่าข้อมูลที่จะส่งผ่านนั้นมีความปลอดภัยหรือไม่ โดยเปรียบเทียบกับกฎต่างๆที่ทางผู้ใช้งานได้กำหนดไว้ แต่ก็ขึ้นกับการตัดสินใจของผู้ใช้งานเองด้วย ถ้าหากข้อมูลไม่ปลอดภัยได้แต่รับการอนุญาตจากผู้ใช้งาน Firewall ก็จะปล่อยให้ผ่านเข้าไปได้
+                    Kali Linux เป็นระบบปฏิบัติการ Linux ที่ออกแบบมาเพื่อให้บริการสำหรับการทดสอบความปลอดภัยและการทดสอบทางไซเบอร์. มันถูกพัฒนาขึ้นโดย Offensive Security Ltd. Kali Linux มีเครื่องมือทดสอบความปลอดภัยที่หลากหลายและทันสมัย, ทำให้เป็นเครื่องมือที่น่าสนใจสำหรับผู้ที่ทำงานในด้านความปลอดภัยข้อมูล, การทดสอบทางไซเบอร์, และทดสอบทางเครือข่าย
+                </Typography>
+                <Typography variant="body1" paragraph>
+                    โดยการใช้งาน สามารถ SSH เข้าไปใช้ Kali Host ที่ระบบเตรียมไว้ให้ได้เลย
                 </Typography>
 
                 <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
 
                     <Typography variant="h5">
-                        Firewall มีประโยชน์อย่างไร ?
+                        SSH (Secure Shell)
                     </Typography>
 
-                    <Typography sx={{ paddingLeft: 5, padding: 1 }}>
-                        <Typography variant="h6" sx={{ paddingBottom: 2 }}>
-                            1.ช่วยลดช่องโหว่การรักษาความปลอดภัยเครือข่ายของบริษัท
-                            <Typography>
-                                วัตถุประสงค์หลักของไฟร์วอลล์ คือเพื่อป้องกันการโจมตีการรักษาความปลอดภัยเครือข่าย หรือการโจมตีของแฮกเกอร์ ไฟร์วอลล์ฮาร์ดแวร์สามารถกำหนดค่าหรือกฎเฉพาะที่สามารถจดจำและบล็อคไวรัสและมัลแวร์ได้ และยังสามารถบล็อคการเข้าถึงจากภายนอกที่ไม่ได้รับอนุญาตอีกด้วย
-                            </Typography>
-                        </Typography>
-
-                        <Typography variant="h6" sx={{ paddingBottom: 2 }}>
-                            2.ช่วยตรวจสอบและควบคุมการใช้อินเตอร์เน็ต
-                            <Typography>
-                                นอกเหนือจากการตรวจสอบการรับส่งข้อมูลขาเข้าแล้ว ไฟร์วอลล์ฮาร์ดแวร์ยังสามารถใช้เพื่อตรวจสอบและบล็อคการรับส่งข้อมูลขาออกจากภายในองค์กรของคุณได้อีกด้วย โดยการนำกฎที่กำหนดมาใช้ ทางไอทีสามารถบล็อคการเข้าถึงโซเชียลมีเดีย, ระบุตัวตน และหยุดการเข้าถึงเว็บไซต์ที่ไม่เหมาะสมได้ รวมถึงยังสามารถจำกัดการใช้งานอินเตอร์เน็ตทั้งในและนอกเวลาทำการอีกด้วย โดยกระบวนการนี้จะช่วยเพิ่มผลลัพธ์ที่ดีในการทำงานและในที่สุดแล้วก็จะช่วยเพิ่มผลกำไรทางธุรกิจได้อีกด้วย                            </Typography>
-                        </Typography>
-
-                        <Typography variant="h6" sx={{ paddingBottom: 2 }}>
-                            3.ช่วยลดช่องโหว่การรักษาความปลอดภัยเครือข่ายของบริษัท
-                            <Typography>
-                                ปัจจุบัน ยังไม่มีไฟร์วอลล์ใดในโลกที่สามารถป้องกันการคุกคามทางไซเบอร์ได้ 100% ท้ายที่สุดทุกเครือข่ายก็อาจถูกโจมตีหรือละเมิดได้ แม้แต่ Google เองก็ตาม
-                                ไฟร์วอลล์ฮาร์ดแวร์มีความสามารถในการตรวจสอบการรับส่งข้อมูลเครือข่ายขาเข้าและขาออกทั้งหมด รวมถึงแจ้งเตือนบริษัท/ผู้จัดการด้าน IT ของคุณเมื่อมีกิจกรรมที่ไม่ได้รับอนุญาตเกิดขึ้น สิ่งนี้จะช่วยให้คุณดำเนินการได้อย่างรวดเร็วเมื่อมีการละเมิดหรือโจมตีเกิดขึ้น
-                                ซึ่งคุณจะสามารถกำหนดค่าและจัดการการแจ้งเตือนของคุณภายในแผงควบคุมไฟร์วอลล์ซอฟต์แวร์ โดยส่วนใหญ่แล้วไฟร์วอลล์ฮาร์ดแวร์มักกำหนดค่าให้มีการแจ้งเตือนผ่านทางอีเมลหรือข้อความ
-                            </Typography>
-                        </Typography>
-
-                        <Typography variant="h6" sx={{ paddingBottom: 2 }}>
-                            4.ช่วยปกป้องอีเมลและชื่อเสียงของบริษัท
-                            <Typography>
-                                เราสามารถกำหนดค่าไฟร์วอลล์ฮาร์ดแวร์เพื่อปกป้องเซิร์ฟเวอร์ของอีเมล ถ้าหากแฮ็กเกอร์เข้าถึงเครือข่ายของคุณ พวกเขาอาจจะขโมยเซิร์ฟเวอร์ SMTP ของคุณ และใข้มันส่งสแปมไปยังผู้ติดต่อจากบัญชีอีเมลของคุณ การกระทำนี้อาจส่งผลให้สูญเสียลูกค้าหรือสร้างความเสียหายต่อชื่อเสียงของบริษัทได้
-                            </Typography>
-                        </Typography>
-
-                        <Typography variant="h6" sx={{ paddingBottom: 2 }}>
-                            5.การสร้างเครือข่ายส่วนตัวเสมือน
-                            <Typography>
-                                ไฟร์วอลล์ฮาร์ดแวร์สามารถนำมาสร้างความปลอดภัยการเข้ารหัสเครือข่ายการเชื่อมต่อ งเรียกว่าเครือข่ายส่วนตัวเสมือน หรือที่เรียกว่า VPN โดยพนักงานที่ทำงานในบ้านและผู้ใช้อุปกรณ์เคลื่อนที่สามารถเชื่อมต่อกับเครือข่ายของบริษัท และเข้าถึงทรพยากรผ่านการเชื่อมต่อที่เข้ารหัสเฉพาะ ซึ่งจะทำให้เครือข่ายของคุณมีความปลอดภัยเพิ่มขึ้นอีกขั้น โดยสามารถไฟร์วอลล์ให้เหมาะสม และช่วยไม่ให้เกิดการดักจับข้อมูลขององค์กรและข้อมูลส่วนตัวจากบุคคลภายนอกได้                            </Typography>
-                        </Typography>
-
-                    </Typography>
-                </Typography>
-                <Divider variant="middle" />
-                <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
-
-                    <Typography variant="h5">
-                        FortiGate
+                    <Typography sx={{ padding: 1, paddingBottom: 2 }}>
                         <Typography>
-                            FortiGate คือ โซลูชันระบบรักษาความปลอดภัยที่มาในรูปแบบ Box Appliance หรือที่เรารู้จักกันว่า Firewall แต่ FortiGate ได้ถูกพัฒนาความสามารถ ให้เหนือกว่า Firewall ทั่วไป เราจะเรียกมันว่า “Next Generation Firewall” (NGFW)
+                            SSH (Secure Shell) คือ Network Protocal ที่สามารถแลกเปลี่ยนข้อมูลโดยช่องทางที่ปลอยภัย (Secure Channel) ระหว่างอุปกรณ์เครือข่ายสองตัว ใช้ Linux หรือ Unix เป็นระบบปฏิบัตการพื้นฐานในการเข้าถึงบัญชีผู้ใช้ (Shell Accounts) ซึ่ง SSH ได้รับการออกแบบให้มาแทนการ Telnet, Rlogin, RSH (The remote shell) ด้วยเหตุผลทางด้านความปลอดภัย การส่งข้อมูลจะอยู่ในรูปแบบตัวอักษร (Plaintext) ที่มีการเข้ารหัสข้อมูล (Encryption) เพื่อให้ข้อมูลเป็นความลับและให้สามารถส่งข้อมูลผ่านเครือข่าย Internet ได้อย่างสมบูรณ์ สามารถใช้งาน SSH ผ่านโปรแกรมประยุกต์ (Applications) ได้มากมายบนระบบปฏิบัติการ Unix, Microsoft Windows, Apple Mac และ Linux โปรแกรมประยุกต์ (Applications)
                         </Typography>
+                    </Typography>
+                </Typography>
+
+                <Divider variant="middle" />
+
+                <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
+
+                    <Typography variant="h5">
+                        Putty
+                        <Typography>
+                            Putty เป็นโปรแกรม Remote Server หรือ SSH ( Secure Shell ) พูดให้เข้าใจง่ายๆก็คือ เราสามารถใช้โปรแกรมนี้ในการ สั่งงาน Server ด้วย command line โดยส่วนใหญ่แล้วจะใช้เชื่อมต่อไปยัง server ที่เป็น linux รองรับการเชื่อมต่อหลากหลายรูปแบบดังนี้                        </Typography>
 
                         <Typography sx={{ paddingTop: 2 }}>
-                            โดยตัว FortiGate นั้น จะสามารถป้องกันการโจมตีจากผู้ที่ไม่หวังดีได้มากยิ่งขึ้น เช่น
                             <Typography>
-                                - ระบบ Network Firewall
+                                - Raw
                             </Typography>
                             <Typography>
-                                - ระบบ Intrusion Prevention System ที่จะคอยตรวจสอบ Package ขาเข้า-ขาออกที่ผิดปกติ และหยุดการโจมตีก่อนที่จะเกิดขึ้นได้
+                                - Telnet
                             </Typography>
                             <Typography>
-                                - ระบบ Antivirus & Spam
+                                - Rlogin
                             </Typography>
                             <Typography>
-                                - ระบบ VPN
+                                - SSH
                             </Typography>
                             <Typography>
-                                - ระบบกรองข้อมูล
+                                - Serial
                             </Typography>
-                            <Typography>
-                                - ระบบ Load Balance
-                            </Typography>
-                            <Typography>
-                                - ระบบสร้าง Report ของผู้ใช้งานต่าง ๆ ให้แก่ผู้ดูแลระบบ
-                            </Typography>
+
                         </Typography>
                     </Typography>
                 </Typography>
@@ -112,15 +135,38 @@ export default function Lecture2() {
 
                 <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
                     <Typography variant="h5">
-                        ภาพรวมของระบบ
+                        วิธีใช้งาน putty เบื้องต้น
                         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                             <img
-                                src="/assets/L1_pic/system.jpg"
+                                src="/assets/L2_pic/putty.jpg"
                                 alt="System"
                             />
                         </Box>
                         <Typography>
-                            ในโปรแกรมนี้ เราจะเรียนรู้การตั้งค่า Firewall ที่ได้ติดตั้งลงภายใน VMware ในเครื่องที่ทำหน้าที่เป็น Host โดยทุกๆครั้งที่ติดตั้งใหม่ VM แต่ละตัวจะได้รับ IP จาก Router ใหม่ทุกครั้ง โดยสามารถตรวจสอบ IP ของVMได้จากเครื่องที่ทำหน้าที่เป็น Host
+                            เริ่มแรกโหลดโปรแกรมที่ <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" rel="noreferrer" target="_blank"> HERE </a>เมื่อ download มาแล้วสามารถรันโปรแกรมได้ทันทีไม่ต้องติดตั้ง
+                        </Typography>
+                        <Typography>
+                            โดย Windows 64bit ให้โหลด 64-bit x86 หรือ 32-bit x86 สำหรับ Windows 32bit
+                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5, paddingBottom: 5 }}>
+                            <img
+                                src="/assets/L2_pic/putty_3.jpg"
+                                alt="System"
+                            />
+                        </Box>
+                        <Typography>
+                            การใช้งาน-putty-เบื้องต้น วิธีการใช้งานไม่ยากครับ หลักๆก็จะมีอยู่สามส่วน
+                        </Typography>
+                        <Typography sx={{ paddingTop: 2 }}>
+                            <Typography>
+                                1.คือการ config ว่าเราจะเชื่อต่อไปยัง server ip อะไร และ port อะไร
+                            </Typography>
+                            <Typography>
+                                2.คือการ เลือกประเภทของการเชื่อมต่อ
+                            </Typography>
+                            <Typography>
+                                3.คือส่วนของการบันทึกค่าที่เรา config ไว้ เพื่อเพิ่มความสะดวก เมื่อเรามาใช้งานครั้งต่อไปไม่ต้องมา config ใหม่
+                            </Typography>
                         </Typography>
                     </Typography>
                 </Typography>
@@ -128,52 +174,101 @@ export default function Lecture2() {
                 <Divider variant="middle" />
 
                 <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
-                    <Typography variant="h5">
-                        การตรวจสอบ IP ของแต่ละเครื่อง
+                    <Typography variant="h4">
+                        การลาดตระเวณ (Reconnaissance)
                         <Typography sx={{ paddingTop: 2, paddingBottom: 5 }} variant="h5">
-                            IP : Firewall FortiGate
-                            <Box sx={{ paddingTop: 2 }}>
+                            Nmap
+                            <Typography>
+                                Nmap (“Network Mapper”) tool นี้เป็น free license และ เป็น open source ทำหน้าที่ ค้นหาเครือข่ายเป้าหมายและใช้ตรวจสอบความปลอดภัยของเครือข่าย
+                            </Typography>
+                            <Box sx={{ paddingBottom: 5, paddingTop: 5 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                     <img
-                                        src="/assets/L1_pic/FG_login.jpg"
+                                        src="/assets/L2_pic/nmap1.jpg"
                                         alt="System"
                                     />
                                 </Box>
-                                <Typography sx={{ paddingTop: 2, display: 'flex', justifyContent: 'center' }} variant="subtitle1">
-                                    Login ด้วย Username และ Password admin
-                                </Typography>
                             </Box>
-                            <Box sx={{ paddingTop: 5, paddingBottom: 1 }}>
-                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                    <img
-                                        src="/assets/L1_pic/FG_IP.jpg"
-                                        alt="System"
-                                    />
-                                </Box>
-                                <Typography sx={{ paddingTop: 2, display: 'flex', justifyContent: 'center' }} variant="subtitle1">
-                                    พิมคำสั่ง : get system interface physical
+                            <Typography>
+                                Nmap Network Scanning (NNS) ค้นหาเป้าหมายภายในเครือข่าย
+                            </Typography>
+                            <Typography sx={{ paddingTop: 2 }}>
+                                <Typography>
+                                    - หา IP เครื่องที่ที่ยังทำงานอยู่หรือเปิดเครื่องเสียบปลั๊ก Network อยู่เท่านั้น กรณีเครื่องที่ปิดหรือ down อยู่ไม่สามารถค้นหาได้
                                 </Typography>
-                            </Box>
+                                <Typography>
+                                    - หา Port ของเครื่องเป้าหมายว่ามี port ใหนเปิดอยู่บ้าง และเราจะโจมตีได้ทั้งหมดกี่ Port
+                                </Typography>
+                                <Typography>
+                                    -หา OS/Version ของเครื่องเป้าหมายว่าเป็นระบบปฏิบัติการอะไร เช่น Linux 7.x, Windows Server 2xxx เป็นต้น
+                                </Typography>
+                            </Typography>
                         </Typography>
 
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={targetSpecificationData} title='Target Specification' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={nmapScanTechniques} title='Nmap Scan Techniques' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={hostDiscoveryData} title='Host Discovery' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={portSpecificationData} title='Port Specification' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={serviceVersionDetectionData} title='Service and Version Detection' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={osDetectionData} title='OS Detection' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={timingPerformanceData} title='Timing and Performance' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={nseScriptsData} title='NSE Scripts' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={evasionSpoofingData} title='Firewall / IDS Evasion and Spoofing' />
+                        </Box>
+
+                        <Box sx={{ paddingTop: 2, paddingBottom: 5 }}>
+                            <NmapScanTable data={outputData} title='Output' />
+                        </Box>
 
                         <Divider variant="middle" />
+                    </Typography>
+                </Typography>
 
+                <Divider variant="middle" />
 
+                <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
+                    <Typography variant="h4">
+                        Denial of service
+                        <Typography>
+                            Denial of Service หรือ DoS แปลแบบตรงตัวได้คือการปฏิเสธการให้บริการ เป็นการโจมตีโดยมีจุดมุ่งหมายทำให้ระบบไม่สามารถให้บริการได้ แบ่งเป็น 2 กลุ่มคือ
+                        </Typography>
+                        <Typography sx={{ padding: 2 }}>
+                            1.การโจมตีด้วยโครงข่าย (Network base Attack) หรือ การโจมตีด้วยขนาด (Volumetric base Attack) ผู้โจมตีจะส่งข้อมูลที่มีปริมาณมหาศาลเข้าไปที่เป้าหมายเพื่อทำให้การรับ-ส่งข้อมูลเกิดคอขวด (Congestion) จนไม่สามารถติดต่อสื่อสารกับผู้ใช้งานทั่วไปได้ การแก้ไขจะต้องเพิ่มความสามารถในการรับ-ส่งข้อมูลของระบบให้มีขนาดมากกว่าการโจมตีที่เข้ามายังระบบ โดยเทคนิคที่อยู่ในประเภทนี้คือ SYN Flood, UDP Flood, Ping of Death, Reflection, Amplification เป็นต้น ซึ่งการโจมตีประเภทนี้จะพบบ่อยมาก และป้องกันได้ยาก
+                        </Typography>
+                        <Typography sx={{ padding: 2 }}>
+                            2.การโจมตีด้วยแอพพลิเคชั่น (Application base Attack) จะส่งข้อมูลที่อยู่ในเลเยอร์ที่เจ็ดของโอเอสไอ (OSI — Application Layer) เพื่อมุ่งเน้นไปให้แอพพลิเคชั่นหยุดทำงาน ซึ่งการโจมตีชนิดนี้จะอยู่ในระดับที่สูงกว่าการโจมตีด้วยโครงข่าย การแก้ไขจะต้องอาศัยความเชี่ยวชาญของผู้ดูแลระบบเพื่อคัดกรอง แยกแยะข้อมูลที่ส่งเข้ามายังระบบ เทคนิคที่อยู่ในประเภทนี้เช่น HTTP Get/Post flood, SSL Flood, Slowloris, R-U-Dead-Yet (R.U.D.Y), และยังสามารถโจมตีผ่านทางช่องโหว่ของระบบได้ด้วย                        </Typography>
                         <Typography sx={{ paddingTop: 2, paddingBottom: 5 }} variant="h5">
-                            IP : Kali Host
-                            <Box sx={{ paddingTop: 2 }} alignCenter>
-                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            Hping3
+                            <Typography>
+                                Hping3 เป็นแอปพลิเคชั่นเทอร์มินัลสำหรับ ลินุกซ์ ที่จะช่วยให้เราวิเคราะห์และประกอบแพ็กเก็ต
+                                TCP / IP ได้อย่างง่ายดาย ต่างจาก ping ทั่วไปที่ใช้ในการส่งแพ็กเก็ต ICMP แอปพลิเคชันนี้อนุญาตให้ส่งแพ็กเก็ต TCP, UDP และ RAW-IP นอกจากการวิเคราะห์แพ็กเก็ตแล้วแอปพลิเคชั่นนี้ยังสามารถใช้เพื่อวัตถุประสงค์ด้านความปลอดภัยอื่น ๆ เช่นเพื่อทดสอบประสิทธิภาพของ a ไฟร์วอลล์ ผ่านโปรโตคอลที่แตกต่างกันการตรวจจับแพ็กเก็ตที่น่าสงสัยหรือดัดแปลงและแม้แต่การป้องกันการโจมตี DoS ของระบบหรือไฟร์วอล
 
-                                    <img
-                                        src="/assets/L1_pic/Kali_login_VMware.jpg"
-                                        alt="System"
-                                    />
-                                </Box>
-                                <Typography sx={{ paddingTop: 2, display: 'flex', justifyContent: 'center' }} variant="subtitle1">
-                                    Login ด้วย Username และ Password admin
-                                </Typography>
-                            </Box>
+                            </Typography>
 
                             <Box sx={{ paddingTop: 5, paddingBottom: 1 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -186,58 +281,6 @@ export default function Lecture2() {
                                     พิมคำสั่ง : get system interface physical
                                 </Typography>
                             </Box>
-                        </Typography>
-
-
-                        <Divider variant="middle" />
-
-
-                        <Typography sx={{ paddingTop: 2 }} variant="h5">
-                            IP : Web & Syslog Server
-                            <Box sx={{ paddingTop: 2 }} >
-                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                    <img
-                                        src="/assets/L1_pic/Webserver_login.jpg"
-                                        alt="System"
-                                    />
-
-                                </Box>
-                                <Typography sx={{ paddingTop: 2, display: 'flex', justifyContent: 'center' }} variant="subtitle1">
-                                    Login ด้วย Username และ Password admin
-                                </Typography>
-                            </Box>
-                            <Box sx={{ paddingTop: 5, paddingBottom: 1 }}>
-                                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                    <img
-                                        src="/assets/L1_pic/Webserver_IP.jpg"
-                                        alt="System"
-                                    />
-
-                                </Box>
-                                <Typography sx={{ paddingTop: 2, display: 'flex', justifyContent: 'center' }} variant="subtitle1">
-                                    พิมคำสั่ง : get system interface physical
-                                </Typography>
-                            </Box>
-                        </Typography>
-                    </Typography>
-                </Typography>
-
-                <Divider variant="middle" />
-
-                <Typography variant="body1" sx={{ paddingBottom: 2 }} paragraph>
-                    <Typography variant="h4">
-                        การเข้า Fortigate
-                        <Typography>
-                            สามารถเข้าผ่านหน้าเว็บได้โดยพิมพ์ IP ของ Port WAN จาก Fortigate ใน URL
-                        </Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'center', paddingBottom: 2, paddingTop: 2 }}>
-                            <img
-                                src="/assets/L1_pic/FG/login.jpg"
-                                alt="System"
-                            />
-                        </Box>
-                        <Typography sx={{ display: 'flex', justifyContent: 'center', paddingBottom: 2 }}>
-                            ***IP จะเปลี่ยนไปทุกครั้งที่ติดตั้งเซิฟเวอร์เครื่องใหม่***
                         </Typography>
                     </Typography>
 
