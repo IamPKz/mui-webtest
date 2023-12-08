@@ -13,6 +13,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 
+import { ip } from "../_mock/ipa.json"
+
 export default function QuizEditListPage() {
   const [quizs, setQuizs] = useState([]);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -21,7 +23,7 @@ export default function QuizEditListPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/quizlist');
+        const response = await axios.get(`http://${ip}:3000/quizlist`);
         setQuizs(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -44,7 +46,7 @@ export default function QuizEditListPage() {
   const deleteQuiz = async () => {
     try {
       // Make DELETE request to your server endpoint for deleting quizzes
-      await axios.delete(`http://localhost:3000/api/quizzes/${selectedQuizId}`);
+      await axios.delete(`http://${ip}:3000/api/quizzes/${selectedQuizId}`);
       // Update the state after successful deletion
       setQuizs((prevQuizs) => prevQuizs.filter((quiz) => quiz.quiz_id !== selectedQuizId));
       // Close the delete confirmation dialog

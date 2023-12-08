@@ -14,9 +14,11 @@ import TablePagination from '@mui/material/TablePagination';
 import Scrollbar from 'src/components/scrollbar';
 
 import UserTableRow from '../user-table-row';
+import { ip } from "../../../_mock/ipa.json";
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
 import { emptyRows, applyFilter, getComparator } from '../utils';
+
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +31,7 @@ export default function UserPage() {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await axios.get('http://localhost:3000/parselogs');
+        const response = await axios.get(`http://${ip}:3000/parselogs`);
         // Update the state with the fetched data
         
         serlogs(response.data);

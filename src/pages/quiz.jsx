@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+import { ip } from "../_mock/ipa.json"
+
 const quizData =
 {
   quiz_id: 1,
@@ -79,7 +81,7 @@ export default function QuizPage() {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await axios.get(`http://localhost:3000/api/quizzes/${id}`);
+        const response = await axios.get(`http://${ip}:3000/api/quizzes/${id}`);
         // Update the state with the fetched data
         setQuizdatas(response.data);
       } catch (error) {

@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import { ip } from "../_mock/ipa.json"
 
 export default function ProfilePage() {
   const [api_users, setApi_users] = useState([]);
@@ -19,7 +20,7 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:3000/api/user-data', { token });
+        const response = await axios.post(`http://${ip}:3000/api/user-data`, { token });
         setApi_users(response.data[0]);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -38,7 +39,7 @@ export default function ProfilePage() {
 
   const handleSaveClick = async () => {
     try {
-      await axios.put(`http://localhost:3000/update-user/${api_users.user_id}`, { editedData: api_users });
+      await axios.put(`http://172.16.12.35:3000/update-user/${api_users.user_id}`, { editedData: api_users });
       console.log("Success");
     } catch (error) {
       console.error('Error updating user:', error);

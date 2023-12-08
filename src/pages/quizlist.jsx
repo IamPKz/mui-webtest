@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
-
+import { ip } from "../_mock/ipa.json"
 
 export default function QuizListPage () {
   const [quizs , setQuizs] = useState([])
@@ -18,7 +18,7 @@ export default function QuizListPage () {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await axios.get('http://localhost:3000/quizlist');
+        const response = await axios.get(`http://${ip}:3000/quizlist`);
         // Update the state with the fetched data
         
         setQuizs(response.data);

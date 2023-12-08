@@ -15,6 +15,7 @@ import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
 import AddUserForm from '../Add-form-user';
+import { ip } from "../../../_mock/ipa.json";
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
@@ -29,7 +30,7 @@ export default function UserPage() {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await axios.get('http://localhost:3000/user-table');
+        const response = await axios.get(`http://${ip}:3000/user-table`);
         // Update the state with the fetched data
         setApi_users(response.data);
         console.log("แทนที่");
@@ -102,7 +103,7 @@ export default function UserPage() {
 
   const handleAddUser = async (newUserData) => {
     try {
-      const response = await axios.post('http://localhost:3000/new-user', { newUserData });
+      const response = await axios.post('http://172.16.12.35:3000/new-user', { newUserData });
       // Update the state with the new user data
       setApi_users((prevUsers) => [...prevUsers, response.data]);
     } catch (error) {

@@ -18,6 +18,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Scrollbar from 'src/components/scrollbar';
 
 import { NAV } from './config-layout';
+import { ip } from "../../_mock/ipa.json";
 import navConfig from './config-navigation';
 
 // ----------------------------------------------------------------------
@@ -32,7 +33,7 @@ export default function Nav({ openNav, onCloseNav}) {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await axios.post('http://localhost:3000/api/user-data',{ token });
+        const response = await axios.post(`http://${ip}:3000/api/user-data`,{ token });
         // Update the state with the fetched data
         
         setAccount(response.data[0]);

@@ -17,6 +17,8 @@ import DialogActions from '@mui/material/DialogActions';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import DialogContentText from '@mui/material/DialogContentText';
 
+import { ip } from "../_mock/ipa.json"
+
 export default function QuizEditView() {
 
   const id = window.location.pathname.split("/")[2];
@@ -26,7 +28,7 @@ export default function QuizEditView() {
     const fetchData = async () => {
       try {
         // Make your API call here
-        const response = await axios.get(`http://localhost:3000/api/quizzes/${id}`);
+        const response = await axios.get(`http://${ip}:3000/api/quizzes/${id}`);
         // Update the state with the fetched data
         console.log(response.data);
         setQuizName(response.data.quiz_name);
@@ -105,7 +107,7 @@ export default function QuizEditView() {
   
       if (questionIdToDelete) {
         try {
-          axios.delete(`http://localhost:3000/api/deleteQuestion/${questionIdToDelete}`).then(() => {
+          axios.delete(`http://172.16.12.35:3000/api/deleteQuestion/${questionIdToDelete}`).then(() => {
             console.log('Question deleted successfully');
           });
         } catch (error) {
@@ -136,7 +138,7 @@ export default function QuizEditView() {
     console.log(quizData);
 
     try {
-      axios.post('http://localhost:3000/api/updateQuiz', { quiz_id: quizData.quiz_id, quiz_name: quizData.quiz_name, questions: quizData.questions }).then(() => {
+      axios.post('http://172.16.12.35:3000/api/updateQuiz', { quiz_id: quizData.quiz_id, quiz_name: quizData.quiz_name, questions: quizData.questions }).then(() => {
         console.log("Success");
         window.location.pathname = "/quizmanagement"
       });

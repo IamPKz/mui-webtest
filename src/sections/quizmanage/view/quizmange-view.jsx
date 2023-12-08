@@ -12,6 +12,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+import { ip } from "../../../_mock/ipa.json";
+
 // ... (import statements remain the same)
 
 export default function QuizmanageView() {
@@ -86,7 +88,7 @@ export default function QuizmanageView() {
     console.log(quizData);
 
     try {
-      axios.post(`http://localhost:3000/addQuiz`, { quizName: quizData.quizName, questions: quizData.questions }).then(() => {
+      axios.post(`http://${ip}:3000/addQuiz`, { quizName: quizData.quizName, questions: quizData.questions }).then(() => {
         console.log("Success");
       });
     } catch (error) {

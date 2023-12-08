@@ -1,8 +1,12 @@
 import axios from "axios"
 
+import { ip } from "../_mock/ipa.json"
+
 export function UseLogin (username, password){
+  console.log(ip);
+
     axios
-      .post('http://localhost:3000/login', { identifier : username, password})
+      .post(`http://${ip}:3000/login`, { identifier : username, password})
       .then((response) => {
         console.log("success");
         if (response.status === 200 && response.data.token) {
